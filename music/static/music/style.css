@@ -5,7 +5,7 @@ img {
 }
 
 img:hover{
-    transform:scale(4);
+    transform:scale(3) translateY(30px);
 }
 
 #found_album_cover_art {
