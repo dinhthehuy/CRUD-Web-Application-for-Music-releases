@@ -1,0 +1,14 @@
+img {
+    max-width: 50px;
+    max-height: 50px;
+    transition: transform 0s;
+}
+
+img:hover{
+    transform:scale(4);
+}
+
+#found_album_cover_art {
+    max-width: 200px;
+    max-height: 200px;
+}
