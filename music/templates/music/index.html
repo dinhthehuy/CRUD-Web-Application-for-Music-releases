@@ -1,10 +1,72 @@
+{%  load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'music/style.css' %}">
+    <script src="{% static 'music/script.js' %}"></script>
 </head>
 <body>
-$END$
+    <form method="get" action="{% url 'search' %}">
+        <label for="album_name">Album: </label>
+        <input type="text" id="album_name" name="album_name">
+        <br>
+        <label for="artist_name">Artist: </label>
+        <input type="text" id="artist_name" name="artist_name">
+        <br>
+        <label for="logged_date">First listened on: </label>
+        <input type="date" id="logged_date" name="logged_date">
+        <br>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if found_album %}
+        {% for item in found_album %}
+            <form method="post" action="{% url 'add' item.album_id item.album_name item.artist_id item.artist_name item.release_date item.num_songs item.logged_date %}">
+                {% csrf_token %}
+                <img id="found_album_cover_art" src= {{ image_url }}>
+                <input type="hidden" name="image_url" value="{{ image_url }}">
+                <p>Title: {{ item.album_name }}</p>
+                <p>Artist: {{ item.artist_name }}</p>
+                <p>Release date: {{ item.release_date }}</p>
+                <input type="submit" value="Submit">
+                <br> <br>
+            </form>
+        {% endfor %}
+    {% endif %}
+
+    {% if logged_albums %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Release year</th>
+                    <th>Delete?</th>
+                </tr>
+            </thead>
+
+            {% for log in logged_albums %}
+                <tr>
+                    <td>{{ log.logged_date }}</td>
+                    <td> <img src={{ log.album.image_url }}> </td>
+                    <td>{{ log.album }}</td>
+                    <td>{{ log.artist.name }}</td>
+                    <td>{{ log.album.release_date|date:"Y" }}</td>
+                    <td>
+                        <form method="post" action="{% url 'delete' log.artist_id log.album_id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    {% endif %}
 </body>
 </html>
