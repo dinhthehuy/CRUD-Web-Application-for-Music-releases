@@ -2,7 +2,7 @@ from .models import Album, Artist, Log, AlbumTag
 
 
 def get_album_by_id(album_id):
-    return Album.objects.filter(mbid=album_id).first()
+    return Album.objects.get(mbid=album_id)
 
 
 def get_artist_by_id(artist_id):
@@ -17,8 +17,16 @@ def get_all_logged_albums():
     return Log.objects.all()
 
 
-def get_all_album_tags(album_id):
-    return AlbumTag.objects.filter(album=album_id).all()
+def get_all_tags_by_album_id(album_id):
+    return AlbumTag.objects.filter(album=album_id).order_by('-count')
+
+
+def get_all_albums_with_tag(tag):
+    return AlbumTag.objects.filter(name=tag)
+
+
+def get_all_albums_by_artist(artist_id):
+    return Album.objects.filter(artist=artist_id).order_by('release_date')
 
 
 def insert_artist(artist_id, artist_name):
@@ -41,3 +49,10 @@ def insert_logged_album(album_id, artist_id, logged_date):
     new_logged_album = Log(album=album, artist=artist, logged_date=logged_date)
     new_logged_album.save()
     return new_logged_album
+
+
+def insert_album_tag(album_id, tag, count):
+    album = get_album_by_id(album_id)
+    new_tag = AlbumTag(album=album, name=tag, count=count)
+    new_tag.save()
+    return new_tag
