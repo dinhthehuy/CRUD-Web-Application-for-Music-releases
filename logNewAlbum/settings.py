@@ -127,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'music/static/music'
+    BASE_DIR / 'music/static/music/'
 ]
 
 # Default primary key field type
