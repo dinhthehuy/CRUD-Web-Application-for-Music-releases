@@ -5,8 +5,9 @@ import requests
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.urls import reverse
-from .models import Album, Log
-from .crud import insert_album, insert_logged_album, insert_artist, get_artist_by_id, get_log
+from .models import Log
+from .crud import insert_album, insert_logged_album, insert_artist, get_artist_by_id, insert_album_tag, \
+    get_all_tags_by_album_id, get_all_albums_with_tag, get_album_by_id, get_all_albums_by_artist
 from django.shortcuts import render, redirect
 from musicbrainzngs import musicbrainz as mbz
 
@@ -23,17 +24,23 @@ def index(request):
 
 
 def get_album(request, album_id):
-    response = requests.get(url, headers={'user-agent': USER_AGENT}, params={'api_key': API_KEY, 'format': 'json',
-                                                                             'method': 'album.getInfo',
-                                                                             'mbid': album_id}).json()
-    return JsonResponse(response)
+    album = get_album_by_id(album_id)
+    tags = get_all_tags_by_album_id(album_id)
+    return render(request, 'music/album.html', {'album': album, 'tags': tags})
 
 
 def get_artist(request, artist_id):
-    response = requests.get(url, headers={'user-agent': USER_AGENT}, params={'api_key': API_KEY, 'format': 'json',
-                                                                             'method': 'artist.getTopAlbums',
-                                                                             'mbid': artist_id}).json()
-    return JsonResponse(response)
+    albums = get_all_albums_by_artist(artist_id)
+    return render(request, 'music/artist.html', {'albums_by_artist': albums, 'artist': get_artist_by_id(artist_id)})
+
+
+def get_albums_by_tag(request, album_tag):
+    albums_by_tag = get_all_albums_with_tag(album_tag)
+
+    albums = []
+    for album in albums_by_tag:
+        albums.append(album.album)
+    return render(request, 'music/tag.html', {'tag': album_tag, 'albums': albums})
 
 
 def search_album(request):
@@ -45,18 +52,15 @@ def search_album(request):
                                                                              }).json()
     found_album = []
     res = response['album']
-    mbz_rg = mbz.search_release_groups(release=request.GET.get('album_name'),
-                                       artistname=request.GET.get('artist_name'))['release-group-list']
+
     if res['mbid'] == '':
         return JsonResponse(response, safe=False)
     else:
-        if res.get('tracks'):
-            num_songs = len(res.get('tracks')['track'])
-        else:
-            num_songs = 0
-
-        release_date = mbz_rg[0].get('first-release-date')
-        artist_id = mbz_rg[0]['artist-credit'][0]['artist']['id']
+        # return JsonResponse(mbz.search_release_groups(reid=res['mbid'], strict=True), safe=False)
+        mbz_rg = mbz.search_release_groups(reid=res['mbid'])['release-group-list'][0]
+        release_date = mbz_rg.get('first-release-date')
+        artist_id = mbz_rg['artist-credit'][0]['artist']['id']
+        num_songs = len(res.get('tracks')['track']) if res.get('tracks') else 0
 
         temp = {
             'album_name': res['name'],
@@ -75,13 +79,22 @@ def search_album(request):
 def add_log(request, album_id, album_name, artist_id, artist_name, release_date, num_songs, log_date):
     if request.method == 'POST':
         release_date = '2000-01-01' if not re.match(r'^\d{4}-\d{2}-\d{2}$', release_date) else release_date
+
+        tags = mbz.search_release_groups(reid=album_id)['release-group-list'][0].get('tag-list')
+
         if get_artist_by_id(artist_id) is None:
             insert_artist(artist_id, artist_name)
+
         image_url = request.POST.get('image_url')
         insert_album(album_id, album_name, artist_id, release_date, num_songs, image_url)
+        insert_logged_album(album_id, artist_id, log_date)
 
-        if not get_log(album_id):
-            insert_logged_album(album_id, artist_id, log_date)
+        if tags is not None:
+            for tag in tags:
+                if "/" in tag['name']:
+                    continue
+                insert_album_tag(album_id, tag['name'], tag['count'])
+
     return redirect(reverse('index'))
 
 
