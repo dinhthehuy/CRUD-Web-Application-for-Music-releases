@@ -9,6 +9,11 @@ services:
       - POSTGRES_USER=dinht
       - POSTGRES_DB=music
       - POSTGRES_PASSWORD=Dinhthehuy0811
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 
   web:
     build:
@@ -19,6 +24,11 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
     env_file:
       - ./logNewAlbum/.env
     depends_on:
