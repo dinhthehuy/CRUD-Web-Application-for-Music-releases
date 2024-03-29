@@ -1,14 +1,25 @@
-img {
+.logged_album_cover_art {
     max-width: 50px;
     max-height: 50px;
-    transition: transform 0s;
 }
 
-img:hover{
-    transform:scale(3) translateY(30px);
-}
-
-#found_album_cover_art {
+.found_album_cover_art {
     max-width: 200px;
     max-height: 200px;
+}
+
+.log_date_col {
+    width: 120px;
+}
+
+.album_name_col {
+    width: 450px;
+}
+
+.artist_name_col {
+    width: 250px;
+}
+
+.release_year_col {
+    max-width: 40px;
 }
