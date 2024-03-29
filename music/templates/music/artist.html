@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist:</title>
+</head>
+<body>
+    <h1>{{ artist.name }}</h1>
+    {% for album in albums_by_artist %}
+        <li><a href="{% url 'albums' album.mbid %}">{{ album.name }}</a> ({{album.release_date|date:"Y"}})</li>
+    {% endfor %}
+</body>
+</html>

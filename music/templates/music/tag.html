@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'music/style.css' %}">
+    <title>Tag: {{ tag }}</title>
+</head>
+<body>
+    <h1>Tag: {{ tag }}</h1>
+    <ul>
+        {% for album in albums %}
+        <li><a href="{% url 'albums' album.mbid %}">{{ album.name }}</a> ({{ album.release_date|date:"Y" }})</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

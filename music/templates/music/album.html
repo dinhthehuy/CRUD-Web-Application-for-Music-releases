@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ album.name }}</title>
+</head>
+<body>
+<a href="javascript:history.back()">Back</a>
+    <h1>{{ album.name }}</h1>
+    <ul>
+        <li>Artist: <a href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></li>
+        <li>Release date: {{ album.release_date }}</li>
+        <li>No. tracks: {{ album.num_songs }}</li>
+        <li>Tags: {% for tag in tags %} <a href="{% url 'tag' tag.name %}">{{ tag.name }}</a> {% endfor %}</li>
+    </ul>
+    <img src={{ album.image_url }}>
+</body>
+</html>
