@@ -31,7 +31,7 @@ class Log(models.Model):
     logged_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.album
+        return f"{self.logged_date} {self.album.name} - {self.artist.name}"
 
 
 class AlbumTag(models.Model):
