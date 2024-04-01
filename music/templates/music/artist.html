@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Artist:</title>
+    <title>{{ artist.name }}</title>
 </head>
 <body>
-<a href="javascript:history.back()">Back</a>
+<a href="javascript:history.back()">Back </a>
     <h1>{{ artist.name }}</h1>
+    <h2>Discography</h2>
     {% for album in albums_by_artist %}
         <li><a href="{% url 'albums' album.mbid %}">{{ album.name }}</a> ({{album.release_date|date:"Y"}})</li>
     {% endfor %}

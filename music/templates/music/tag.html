@@ -5,11 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'music/style.css' %}">
-    <title>Tag: {{ tag }}</title>
+    <title>{{ tag }}</title>
 </head>
 <body>
 <a href="javascript:history.back()">Back</a>
-    <h1>Tag: {{ tag }}</h1>
+    <h1>{{ tag }}</h1>
     <ul>
         {% for album in albums %}
         <li><a href="{% url 'albums' album.mbid %}">{{ album.name }}</a> ({{ album.release_date|date:"Y" }})</li>

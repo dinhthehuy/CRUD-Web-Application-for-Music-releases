@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Search result:</title>
 </head>
 <body>
-$END$
+    <form method="get" action="{% url 'search' %}">
+        <label for="album_name">Album: </label>
+        <input type="text" id="album_name" name="album_name">
+        <br>
+        <label for="artist_name">Artist: </label>
+        <input type="text" id="artist_name" name="artist_name">
+        <br>
+        <label for="logged_date">First listened on: </label>
+        <input type="date" id="logged_date" name="logged_date">
+        <br>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if found_album %}
+        {% for item in found_album %}
+            <form method="post" action="{% url 'add' item.album_id item.album_name item.artist_id item.artist_name item.release_date item.num_songs item.logged_date %}">
+                {% csrf_token %}
+                <img class="found_album_cover_art" src= {{ image_url }}>
+                <input type="hidden" name="image_url" value="{{ image_url }}">
+                <p>Title: {{ item.album_name }}</p>
+                <p>Artist: {{ item.artist_name }}</p>
+                <p>Release date: {{ item.release_date }}</p>
+                <input type="submit" value="Submit">
+                <br> <br>
+            </form>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>
