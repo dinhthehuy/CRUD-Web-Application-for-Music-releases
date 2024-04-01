@@ -2,7 +2,7 @@ from .models import Album, Artist, Log, AlbumTag
 
 
 def get_album_by_id(album_id):
-    return Album.objects.get(mbid=album_id)
+    return Album.objects.filter(mbid=album_id).first()
 
 
 def get_artist_by_id(artist_id):

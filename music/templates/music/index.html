@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>The Log</title>
     <link rel="stylesheet" href="{% static 'music/style.css' %}">
     <script src="{% static 'music/script.js' %}"></script>
 </head>
@@ -22,21 +22,7 @@
         <input type="submit" value="Search">
     </form>
 
-    {% if found_album %}
-        {% for item in found_album %}
-            <form method="post" action="{% url 'add' item.album_id item.album_name item.artist_id item.artist_name item.release_date item.num_songs item.logged_date %}">
-                {% csrf_token %}
-                <img class="found_album_cover_art" src= {{ image_url }}>
-                <input type="hidden" name="image_url" value="{{ image_url }}">
-                <p>Title: {{ item.album_name }}</p>
-                <p>Artist: {{ item.artist_name }}</p>
-                <p>Release date: {{ item.release_date }}</p>
-                <input type="submit" value="Submit">
-                <br> <br>
-            </form>
-        {% endfor %}
-    {% endif %}
-
+    <h2>So far you've logged {{ count }} albums</h2>
     {% if logged_albums %}
         <table>
             <thead>
@@ -45,7 +31,7 @@
                     <th></th>
                     <th class="album_name_col">Album</th>
                     <th class="artist_name_col">Artist</th>
-                    <th class="release_year_col">Year</th>
+                    <th class="release_year_col">Release year</th>
                     <th>Delete?</th>
                 </tr>
             </thead>
@@ -58,7 +44,7 @@
                     <td><a href="{% url 'artists' log.artist_id %}">{{ log.artist.name }}</a></td>
                     <td>{{ log.album.release_date|date:"Y" }}</td>
                     <td>
-                        <form method="post" action="{% url 'delete' log.artist_id log.album_id %}">
+                        <form method="post" action="{% url 'delete' log.id %}">
                             {% csrf_token %}
                             <input type="submit" value="Delete">
                         </form>

@@ -20,7 +20,8 @@ mbz.set_useragent('get_data', '0.1')
 # Create your views here.
 def index(request):
     logged_albums = Log.objects.order_by('-logged_date')
-    return render(request, 'music/index.html', {'logged_albums': logged_albums})
+    log_count = Log.objects.count()
+    return render(request, 'music/index.html', {'logged_albums': logged_albums, 'count': log_count})
 
 
 def get_album(request, album_id):
@@ -73,7 +74,7 @@ def search_album(request):
         }
         image_url = res['image'][4]['#text']
         found_album.append(temp)
-    return render(request, 'music/index.html', context={'found_album': found_album, 'image_url': image_url})
+    return render(request, 'music/search.html', context={'found_album': found_album, 'image_url': image_url})
 
 
 def add_log(request, album_id, album_name, artist_id, artist_name, release_date, num_songs, log_date):
@@ -86,19 +87,19 @@ def add_log(request, album_id, album_name, artist_id, artist_name, release_date,
             insert_artist(artist_id, artist_name)
 
         image_url = request.POST.get('image_url')
-        insert_album(album_id, album_name, artist_id, release_date, num_songs, image_url)
+
+        if get_album_by_id(album_id) is None:
+            insert_album(album_id, album_name, artist_id, release_date, num_songs, image_url)
+            if tags is not None:
+                for tag in tags:
+                    if "/" in tag['name']:
+                        continue
+                    insert_album_tag(album_id, tag['name'], tag['count'])
         insert_logged_album(album_id, artist_id, log_date)
-
-        if tags is not None:
-            for tag in tags:
-                if "/" in tag['name']:
-                    continue
-                insert_album_tag(album_id, tag['name'], tag['count'])
-
     return redirect(reverse('index'))
 
 
-def delete_log(request, artist_id, album_id):
-    to_delete = Log.objects.get(artist_id=artist_id, album_id=album_id)
+def delete_log(request, log_id):
+    to_delete = Log.objects.get(id=log_id)
     to_delete.delete()
     return redirect(reverse('index'))
