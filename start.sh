@@ -1,8 +1,7 @@
 #!/bin/bash
 source .venv/Scripts/activate
 cd /code || exit
-rm -r staticfiles || echo "found no staticfiles folder"
-mkdir staticfiles
+mkdir staticfiles || echo "staticfiles folder already existed"
 echo "-----------Apply migration--------- "
 python manage.py makemigrations
 python manage.py migrate
