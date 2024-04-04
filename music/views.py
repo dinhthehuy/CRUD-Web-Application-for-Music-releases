@@ -58,7 +58,8 @@ def search_album(request):
         return JsonResponse(response, safe=False)
     else:
         # return JsonResponse(mbz.search_release_groups(reid=res['mbid'], strict=True), safe=False)
-        mbz_rg = mbz.search_release_groups(reid=res['mbid'])['release-group-list'][0]
+        # mbz_rg = mbz.search_release_groups(reid=res['mbid'])['release-group-list'][0]
+        mbz_rg = mbz.search_release_groups(artistname=res['artist'], release=res['name'])['release-group-list'][0]
         release_date = mbz_rg.get('first-release-date')
         artist_id = mbz_rg['artist-credit'][0]['artist']['id']
         num_songs = len(res.get('tracks')['track']) if res.get('tracks') else 0
@@ -81,7 +82,7 @@ def add_log(request, album_id, album_name, artist_id, artist_name, release_date,
     if request.method == 'POST':
         release_date = '2000-01-01' if not re.match(r'^\d{4}-\d{2}-\d{2}$', release_date) else release_date
 
-        tags = mbz.search_release_groups(reid=album_id)['release-group-list'][0].get('tag-list')
+        tags = mbz.search_release_groups(artistname=artist_name, release=album_name)['release-group-list'][0].get('tag-list')
 
         if get_artist_by_id(artist_id) is None:
             insert_artist(artist_id, artist_name)
