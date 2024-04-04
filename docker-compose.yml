@@ -30,7 +30,7 @@ services:
           cpus: '0.5'
           memory: 512M
     env_file:
-      - ./logNewAlbum/.env
+      - .env
     depends_on:
       - db
 
