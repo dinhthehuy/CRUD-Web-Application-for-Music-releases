@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   db:
+    container_name: "db_prod"
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -16,6 +17,7 @@ services:
           memory: 512M
 
   web:
+    container_name: "web_prod"
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -35,6 +37,7 @@ services:
       - db
 
   nginx:
+    container_name: "nginx_prod"
     build: ./nginx
     volumes:
       - static_volume:/code/staticfiles
