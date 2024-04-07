@@ -5,7 +5,7 @@ services:
     container_name: "db_dev"
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_staging:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=dinht
       - POSTGRES_DB=music_dev
@@ -21,11 +21,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    command: python manage.py runserver 0.0.0.0:5000
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - "5000:5000"
     deploy:
       resources:
         limits:
@@ -37,4 +37,5 @@ services:
       - db
 
 volumes:
-  postgres_data:
+  postgres_data_staging:
+    driver: local

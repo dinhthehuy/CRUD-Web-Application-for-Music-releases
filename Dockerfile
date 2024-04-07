@@ -10,5 +10,5 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
-#RUN chmod +x /code/start.sh
-#ENTRYPOINT ["./start.sh"]
+RUN chmod +x /code/start.sh
+ENTRYPOINT ["./start.sh"]
