@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    background: #0b0e19;
+}
+#topBar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 0;
+    width: 100%;
+    background: #152238;
+
+}
+
+.topBarUrl {
+    color: #d8dde6;
+    text-decoration: none;
+    padding: 15px;
+}
+
+#mainContent {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+}
+
+#albumCoverContainer {
+    width: 400px;
+    height: 460px;
+    background: #272a37;
+    flex-grow: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+#albumCover{
+    width: 430px;
+    height: 430px;
+    margin-top: 15px;
+}
+
+#albumInfoContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    color: #d8dde6;
+    flex-grow: 2;
+}
+
+.artistUrl, .tagUrl {
+    text-decoration: none;
+    color: #84c5fb;
+}

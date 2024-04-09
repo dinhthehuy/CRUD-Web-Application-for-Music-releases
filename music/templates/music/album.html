@@ -5,16 +5,44 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ album.name }}</title>
+    <link rel="stylesheet" href="{% static 'music/album.css' %}">
+    <script src="{% static 'music/script.js' %}"></script>
 </head>
 <body>
-<a href="javascript:history.back()">Back</a>
-    <h1>{{ album.name }}</h1>
-    <ul>
-        <li>Artist: <a href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></li>
-        <li>Release date: {{ album.release_date }}</li>
-        <li>No. tracks: {{ album.num_songs }}</li>
-        <li>Tags: {% for tag in tags %} <a href="{% url 'tag' tag.name %}">{{ tag.name }}</a> {% endfor %}</li>
-    </ul>
-    <img src={{ album.image_url }}>
+    <div id="topBar">
+        <a class="topBarUrl" href="{% url 'index' %}">Home</a>
+        <a class="topBarUrl" href="{% url 'index' %}">Recommendations</a>
+        <a class="topBarUrl" href="{% url 'index' %}">Year</a>
+        <a class="topBarUrl" href="{% url 'index' %}">Tags</a>
+    </div>
+
+    <div id="mainContent">
+        <div id="albumCoverContainer">
+            <img id="albumCover" src={{ album.image_url }} alt="{{ album.name }}" alt="img">
+        </div>
+
+        <div id="albumInfoContainer">
+            <h1>{{ album.name }}</h1>
+            <p id="artist_name_text">Artist: <a class="artistUrl" href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></p>
+            <p>Release date: {{ album.release_date }}</p>
+            <p>No. tracks: {{ album.num_songs }}</p>
+{#            <p>Tags: {% for tag in tags %} <a class="tagUrl" href="{% url 'tag' tag.name %}">{{ tag.name }}</a> {% endfor %}</p>#}
+        </div>
+    </div>
+
+
+{#    <input id="EditView" type="button" value="Edit" onclick="hideListItems()">#}
+
+    <form method="post" action="{% url 'update_album' %}">
+        <label style="display: none" for="album_name_edit">Album:</label>
+        <input style="display: none" id="album_name_edit" name="album_name_edit" value="{{ album.name }}">
+        <label style="display: none" for="artist_name_edit">Artist:</label>
+        <input style="display: none" id="artist_name_edit" name="artist_name_edit" value="{{ album.artist }}">
+        <label style="display: none" for="album_release_date_edit">Release date:</label>
+        <input style="display: none" id="album_release_date_edit" type="date" value="{{ album.release_date }}">
+        <label style="display: none" for="album_num_songs_edit">No. tracks</label>
+        <input style="display: none" id="album_num_songs_edit" value="{{ album.num_songs }}">
+    </form>
+
 </body>
 </html>
