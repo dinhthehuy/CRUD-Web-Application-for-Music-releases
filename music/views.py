@@ -104,3 +104,6 @@ def delete_log(request, log_id):
     to_delete = Log.objects.get(id=log_id)
     to_delete.delete()
     return redirect(reverse('index'))
+
+def update_album(request):
+    return redirect(reverse('index'))
