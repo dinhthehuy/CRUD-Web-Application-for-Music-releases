@@ -4,12 +4,12 @@
 }
 
 .found_album_cover_art {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .log_date_col {
-    width: 120px;
+    width: 150px;
 }
 
 .album_name_col {
