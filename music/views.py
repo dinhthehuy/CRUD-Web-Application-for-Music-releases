@@ -10,6 +10,7 @@ from .crud import insert_album, insert_logged_album, insert_artist, get_artist_b
     get_all_tags_by_album_id, get_all_albums_with_tag, get_album_by_id, get_all_albums_by_artist
 from django.shortcuts import render, redirect
 from musicbrainzngs import musicbrainz as mbz
+from datetime import datetime
 
 USER_AGENT = 'get_last_fm_data'
 API_KEY = '101e8482407f74afceac4b4b38c19322'
@@ -51,37 +52,40 @@ def search_album(request):
                                                                              'album': request.GET.get('album_name'),
                                                                              'autocorrect': 1
                                                                              }).json()
-    found_album = []
     res = response['album']
 
     if res['mbid'] == '':
         return JsonResponse(response, safe=False)
     else:
-        # return JsonResponse(mbz.search_release_groups(reid=res['mbid'], strict=True), safe=False)
-        # mbz_rg = mbz.search_release_groups(reid=res['mbid'])['release-group-list'][0]
         mbz_rg = mbz.search_release_groups(artistname=res['artist'], release=res['name'])['release-group-list'][0]
-        release_date = mbz_rg.get('first-release-date')
+        mbz_release_date = mbz_rg.get('first-release-date')
+
+        if re.fullmatch('\d{4}', mbz_release_date):
+            mbz_release_date += '-01-01'
+        elif re.fullmatch(r'\d{4}-\d{2}$', mbz_release_date):
+            mbz_release_date += '-01'
+
+        release_date = datetime.strptime(mbz_release_date, '%Y-%m-%d')
         artist_id = mbz_rg['artist-credit'][0]['artist']['id']
         num_songs = len(res.get('tracks')['track']) if res.get('tracks') else 0
 
-        temp = {
+        found_album = {
             'album_name': res['name'],
             'artist_name': res['artist'],
             'album_id': res['mbid'],
-            'logged_date': request.GET.get('logged_date'),
             'release_date': release_date,
             'artist_id': artist_id,
             'num_songs': num_songs,
         }
         image_url = res['image'][4]['#text']
-        found_album.append(temp)
     return render(request, 'music/search.html', context={'found_album': found_album, 'image_url': image_url})
 
 
-def add_log(request, album_id, album_name, artist_id, artist_name, release_date, num_songs, log_date):
+def add_log(request, album_id, album_name, artist_id, artist_name):
     if request.method == 'POST':
-        release_date = '2000-01-01' if not re.match(r'^\d{4}-\d{2}-\d{2}$', release_date) else release_date
-
+        release_date = request.POST.get('release_date')
+        log_date = request.POST.get('logged_date')
+        num_songs = request.POST.get('num_songs')
         tags = mbz.search_release_groups(artistname=artist_name, release=album_name)['release-group-list'][0].get('tag-list')
 
         if get_artist_by_id(artist_id) is None:
@@ -93,8 +97,6 @@ def add_log(request, album_id, album_name, artist_id, artist_name, release_date,
             insert_album(album_id, album_name, artist_id, release_date, num_songs, image_url)
             if tags is not None:
                 for tag in tags:
-                    if "/" in tag['name']:
-                        continue
                     insert_album_tag(album_id, tag['name'], tag['count'])
         insert_logged_album(album_id, artist_id, log_date)
     return redirect(reverse('index'))

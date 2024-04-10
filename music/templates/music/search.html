@@ -2,35 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search result:</title>
+    <title>Search result</title>
 </head>
 <body>
     <form method="get" action="{% url 'search' %}">
-        <label for="album_name">Album: </label>
-        <input type="text" id="album_name" name="album_name">
-        <br>
-        <label for="artist_name">Artist: </label>
-        <input type="text" id="artist_name" name="artist_name">
-        <br>
-        <label for="logged_date">First listened on: </label>
-        <input type="date" id="logged_date" name="logged_date">
-        <br>
+        <table>
+            <tr>
+                <td><label for="album_name">Album: </label></td>
+                <td><input type="text" id="album_name" name="album_name"></td>
+            </tr>
+            <tr>
+                <td><label for="artist_name">Artist: </label></td>
+                <td><input type="text" id="artist_name" name="artist_name"></td>
+            </tr>
+        </table>
         <input type="submit" value="Search">
     </form>
 
     {% if found_album %}
-        {% for item in found_album %}
-            <form method="post" action="{% url 'add' item.album_id item.album_name item.artist_id item.artist_name item.release_date item.num_songs item.logged_date %}">
-                {% csrf_token %}
-                <img class="found_album_cover_art" src= {{ image_url }}>
-                <input type="hidden" name="image_url" value="{{ image_url }}">
-                <p>Title: {{ item.album_name }}</p>
-                <p>Artist: {{ item.artist_name }}</p>
-                <p>Release date: {{ item.release_date }}</p>
-                <input type="submit" value="Submit">
-                <br> <br>
-            </form>
-        {% endfor %}
+        <form method="post" action="{% url 'add' found_album.album_id found_album.album_name found_album.artist_id found_album.artist_name %}">
+            {% csrf_token %}
+            <img class="found_album_cover_art" src= {{ image_url }}>
+            <input type="hidden" name="image_url" value="{{ image_url }}">
+            <table>
+                <tr>
+                    <td>Title:</td>
+                    <td>{{ found_album.album_name }}</td>
+                </tr>
+                <tr>
+                    <td>Artist:</td>
+                    <td>{{ found_album.artist_name }}</td>
+                </tr>
+                <tr>
+                    <td><label for="num_songs">No. Tracks: </label></td>
+                    <td><input type="number" id="num_songs" name="num_songs" value= {{ found_album.num_songs }}></td>
+                </tr>
+                <tr>
+                    <td><label for="release_date">Release date: </label></td>
+                    <td><input type="date" id="release_date" name="release_date" value= {{ found_album.release_date|date:"Y-m-d" }}></td>
+                </tr>
+                <tr>
+                    <td><label for="logged_date">Listened on: </label></td>
+                    <td><input type="date" id="logged_date" name="logged_date"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit">
+        </form>
     {% endif %}
 </body>
 </html>

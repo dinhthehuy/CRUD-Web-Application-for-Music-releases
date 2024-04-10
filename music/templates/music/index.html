@@ -4,21 +4,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Log</title>
+    <title>My Logs</title>
     <link rel="stylesheet" href="{% static 'music/style.css' %}">
     <script src="{% static 'music/script.js' %}"></script>
 </head>
 <body>
     <form method="get" action="{% url 'search' %}">
-        <label for="album_name">Album: </label>
-        <input type="text" id="album_name" name="album_name">
-        <br>
-        <label for="artist_name">Artist: </label>
-        <input type="text" id="artist_name" name="artist_name">
-        <br>
-        <label for="logged_date">First listened on: </label>
-        <input type="date" id="logged_date" name="logged_date">
-        <br>
+        <table>
+            <tr>
+                <td><label for="album_name">Album: </label></td>
+                <td><input type="text" id="album_name" name="album_name"></td>
+            </tr>
+            <tr>
+                <td><label for="artist_name">Artist: </label></td>
+                <td><input type="text" id="artist_name" name="artist_name"></td>
+            </tr>
+        </table>
         <input type="submit" value="Search">
     </form>
 
@@ -51,7 +52,6 @@
                     </td>
                 </tr>
             {% endfor %}
-
         </table>
     {% endif %}
 </body>
