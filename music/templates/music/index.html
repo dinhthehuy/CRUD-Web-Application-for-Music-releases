@@ -12,7 +12,7 @@
     <form method="get" action="{% url 'search' %}">
         <table>
             <tr>
-                <td><label for="album_name">Album: </label></td>
+                <td><label for="album_name">Release:</label></td>
                 <td><input type="text" id="album_name" name="album_name"></td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
             {% for log in logged_albums %}
                 <tr>
                     <td>{{ log.logged_date }}</td>
-                    <td><img class="logged_album_cover_art" src={{ log.album.image_url }}> </td>
+                    <td><img class="logged_album_cover_art" src={{ log.album.image_url }}></td>
                     <td><a href="{% url 'albums' log.album_id %}">{{ log.album }}</a></td>
                     <td><a href="{% url 'artists' log.artist_id %}">{{ log.artist.name }}</a></td>
                     <td>{{ log.album.release_date|date:"Y" }}</td>
