@@ -19,8 +19,7 @@ body {
 }
 
 #content_wrapper {
-    width: 90%;
-    /*height: 100%;*/
+    width: 85%;
     position: absolute;
     background-color: #0b0e19;
 }
@@ -46,8 +45,8 @@ body {
 }
 
 #albumCoverContainer {
-    width: 300px;
-    height: 300px;
+    width: 35%;
+    height: 35%;
     background: #272a37;
     display: flex;
     justify-content: center;
@@ -55,16 +54,18 @@ body {
 }
 
 #albumCover{
-    width: 300px;
-    height: 300px;
+    width: 95%;
+    height: 95%;
+    padding: 5%;
     background: #272a37;
 }
 
 #albumInfoContainer {
-    width: 70%;
+    width: 40%;
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
     color: #d8dde6;
 
 }
@@ -80,5 +81,5 @@ body {
 }
 
 #num-track-col {
-    width: 115px;
+    width: 25%;
 }
