@@ -1,53 +1,50 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Search result</title>
+    <link rel="stylesheet" href="{% static 'music/search.css' %}">
 </head>
 <body>
-    <form method="get" action="{% url 'search' %}">
-        <table>
-            <tr>
-                <td><label for="album_name">Release: </label></td>
-                <td><input type="text" id="album_name" name="album_name"></td>
-            </tr>
-            <tr>
-                <td><label for="artist_name">Artist: </label></td>
-                <td><input type="text" id="artist_name" name="artist_name"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Search">
-    </form>
-
+    <img id="background-image" src={{ image_url }}>
     {% if found_album %}
-        <form method="post" action="{% url 'add' found_album.album_id found_album.album_name found_album.artist_id found_album.artist_name %}">
-            {% csrf_token %}
-            <img class="found_album_cover_art" src= {{ image_url }}>
-            <input type="hidden" name="image_url" value="{{ image_url }}">
-            <table>
-                <tr>
-                    <td>Release:</td>
-                    <td>{{ found_album.album_name }}</td>
-                </tr>
-                <tr>
-                    <td>Artist:</td>
-                    <td>{{ found_album.artist_name }}</td>
-                </tr>
-                <tr>
-                    <td><label for="num_songs">No. Tracks: </label></td>
-                    <td><input type="number" id="num_songs" name="num_songs" value= {{ found_album.num_songs }}></td>
-                </tr>
-                <tr>
-                    <td><label for="release_date">Release date: </label></td>
-                    <td><input type="date" id="release_date" name="release_date" value= {{ found_album.release_date|date:"Y-m-d" }}></td>
-                </tr>
-                <tr>
-                    <td><label for="logged_date">Listened on: </label></td>
-                    <td><input type="date" id="logged_date" name="logged_date"></td>
-                </tr>
-            </table>
-            <input type="submit" value="Submit">
-        </form>
+        <div id="search-result-content">
+            <div id="search-result-cover-art-container">
+                <img id="found-album-cover-art" src= {{ image_url }} alt="{{ found_album.album_name }}">
+            </div>
+
+            <div id="search-result-info-container">
+                <form id="found-album-info-form" method="post" action="{% url 'add' found_album.album_id found_album.album_name found_album.artist_id found_album.artist_name %}">
+                    {% csrf_token %}
+                    <h2>{{ found_album.album_name }}</h2>
+                    <table id="found-album-info-table">
+                        <tr>
+                            <td>Artist</td>
+                            <td>{{ found_album.artist_name }}</td>
+                        </tr>
+                        <tr>
+                            <td><label for="num_songs">No. Tracks</label></td>
+                            <td><input type="number" id="num_songs" name="num_songs" value= {{ found_album.num_songs }}></td>
+                        </tr>
+                        <tr>
+                            <td><label for="release_date">Release date</label></td>
+                            <td><input type="date" id="release_date" name="release_date" value= {{ found_album.release_date|date:"Y-m-d" }}></td>
+                        </tr>
+                        <tr>
+                            <td><label for="logged_date">Listened on</label></td>
+                            <td><input type="date" id="logged_date" name="logged_date"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="image_url">Image url</label></td>
+                            <td><input type="text" id="image_url" name="image_url" value="{{ image_url }}"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Log">
+                </form>
+            </div>
+        </div>
     {% endif %}
 </body>
 </html>
