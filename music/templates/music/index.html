@@ -9,50 +9,53 @@
     <script src="{% static 'music/script.js' %}"></script>
 </head>
 <body>
-    <form method="get" action="{% url 'search' %}">
-        <table>
-            <tr>
-                <td><label for="album_name">Release:</label></td>
-                <td><input type="text" id="album_name" name="album_name"></td>
-            </tr>
-            <tr>
-                <td><label for="artist_name">Artist: </label></td>
-                <td><input type="text" id="artist_name" name="artist_name"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Search">
-    </form>
-
+    <section>
+        <form method="get" action="{% url 'search' %}">
+            <table>
+                <tr>
+                    <td><label for="album_name">Release:</label></td>
+                    <td><input type="text" id="album_name" name="album_name"></td>
+                </tr>
+                <tr>
+                    <td><label for="artist_name">Artist: </label></td>
+                    <td><input type="text" id="artist_name" name="artist_name"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Search">
+        </form>
+    </section>
     <h2>So far you've listened to {{ count }} different albums</h2>
-    {% if logged_albums %}
+    <section>
+        {% if logged_albums %}
         <table>
             <thead>
                 <tr>
+                    <th></th>
                     <th class="log_date_col">Date</th>
                     <th></th>
                     <th class="album_name_col">Album</th>
                     <th class="artist_name_col">Artist</th>
-                    <th class="release_year_col">Release year</th>
-                    <th>Delete?</th>
+                    <th class="release_year_col">Year</th>
                 </tr>
             </thead>
 
             {% for log in logged_albums %}
                 <tr>
+                    <td>
+                        <form method="post" action="{% url 'delete' log.id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="x">
+                        </form>
+                    </td>
                     <td>{{ log.logged_date }}</td>
                     <td><img class="logged_album_cover_art" src={{ log.album.image_url }}></td>
                     <td><a href="{% url 'albums' log.album_id %}">{{ log.album }}</a></td>
                     <td><a href="{% url 'artists' log.artist_id %}">{{ log.artist.name }}</a></td>
                     <td>{{ log.album.release_date|date:"Y" }}</td>
-                    <td>
-                        <form method="post" action="{% url 'delete' log.id %}">
-                            {% csrf_token %}
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
                 </tr>
             {% endfor %}
         </table>
-    {% endif %}
+        {% endif %}
+    </section>
 </body>
 </html>

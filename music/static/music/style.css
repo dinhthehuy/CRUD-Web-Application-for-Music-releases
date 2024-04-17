@@ -1,3 +1,20 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #152238;
+    color: #d8dde6;
+}
+
+a {
+    color: #84c5fb;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #84fffb;
+}
+
 .logged_album_cover_art {
     max-width: 50px;
     max-height: 50px;
@@ -9,7 +26,7 @@
 }
 
 .log_date_col {
-    width: 150px;
+    /*width: 150px;*/
 }
 
 .album_name_col {

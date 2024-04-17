@@ -6,16 +6,17 @@
     <meta charset="UTF-8">
     <title>Search result</title>
     <link rel="stylesheet" href="{% static 'music/search.css' %}">
+    <script src="{% static 'music/script.js' %}"></script>
 </head>
 <body>
     <img id="background-image" src={{ image_url }}>
     {% if found_album %}
-        <div id="search-result-content">
+        <section id="search-result-content">
             <div id="search-result-cover-art-container">
                 <img id="found-album-cover-art" src= {{ image_url }} alt="{{ found_album.album_name }}">
             </div>
 
-            <div id="search-result-info-container">
+            <section id="search-result-info-container">
                 <form id="found-album-info-form" method="post" action="{% url 'add' found_album.album_id found_album.album_name found_album.artist_id found_album.artist_name %}">
                     {% csrf_token %}
                     <h2>{{ found_album.album_name }}</h2>
@@ -34,17 +35,17 @@
                         </tr>
                         <tr>
                             <td><label for="logged_date">Listened on</label></td>
-                            <td><input type="date" id="logged_date" name="logged_date"></td>
+                            <td><input type="date" id="logged_date" name="logged_date" required></td>
                         </tr>
                         <tr>
                             <td><label for="image_url">Image url</label></td>
-                            <td><input type="text" id="image_url" name="image_url" value="{{ image_url }}"></td>
+                            <td><input type="text" id="image_url" name="image_url" value="{{ image_url }}" oninput="updateImage()"></td>
                         </tr>
                     </table>
                     <input type="submit" value="Log">
                 </form>
-            </div>
-        </div>
+            </section>
+        </section>
     {% endif %}
 </body>
 </html>
