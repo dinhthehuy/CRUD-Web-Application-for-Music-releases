@@ -60,7 +60,9 @@ def search_album(request):
         mbz_rg = mbz.search_release_groups(artistname=res['artist'], release=res['name'])['release-group-list'][0]
         mbz_release_date = mbz_rg.get('first-release-date')
 
-        if re.fullmatch('\d{4}', mbz_release_date):
+        if mbz_release_date is None:
+            mbz_release_date = '2000-01-01'
+        elif re.fullmatch('\d{4}', mbz_release_date):
             mbz_release_date += '-01-01'
         elif re.fullmatch(r'\d{4}-\d{2}$', mbz_release_date):
             mbz_release_date += '-01'
