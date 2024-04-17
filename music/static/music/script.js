@@ -14,3 +14,11 @@ function hideListItems() {
     }
 
 }
+
+function updateImage() {
+    const imageUrl = document.getElementById('image_url').value
+    const background = document.getElementById('background-image')
+    const coverArt = document.getElementById('found-album-cover-art')
+    background.src = imageUrl
+    coverArt.src = imageUrl
+}
