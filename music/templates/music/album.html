@@ -10,55 +10,50 @@
 </head>
 <body>
     <img id="background-image" src={{ album.image_url }}>
-    <div id="content_wrapper">
-        <div id="topBar">
-            <a class="topBarUrl" href="{% url 'index' %}">Home</a>
-            <a class="topBarUrl" href="{% url 'index' %}">Recommendations</a>
-            <a class="topBarUrl" href="{% url 'index' %}">My Logs</a>
+    <section id="content-wrapper">
+        <div id="top-bar">
+            <a class="top-bar-url" href="{% url 'index' %}">Home</a>
+            <a class="top-bar-url" href="{% url 'index' %}">Recommendations</a>
+            <a class="top-bar-url" href="{% url 'index' %}">My Logs</a>
         </div>
 
-        <div id="mainContent">
-            <div id="albumCoverContainer">
-                <img id="albumCover" src={{ album.image_url }} alt="{{ album.name }}" alt="img">
+        <div id="main-content">
+            <div id="album-cover-container">
+                <img id="album-cover" src={{ album.image_url }} alt="{{ album.name }}" alt="img">
             </div>
 
-            <div id="albumInfoContainer">
+            <div id="album-info-container">
                 <h1>{{ album.name }}</h1>
-                <table id="albumInfoTable">
+                <input id="edit-button" type="button" value="Edit" onclick="editAlbumInfo()">
+                <form method="post" action="">
+                <table id="album-info-table">
                     <tr>
                         <td>Artist</td>
-                        <td><a class="artistUrl" href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></td>
+                        <td><a class="artist-url" href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></td>
                     </tr>
                     <tr>
                         <td>Released</td>
-                        <td>{{ album.release_date }}</td>
+                        <td class="view-cell">{{ album.release_date }}</td>
+                        <td><input style="display: none" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}"></td>
                     </tr>
                     <tr>
                         <td id="num-track-col">No. tracks</td>
-                        <td>{{ album.num_songs }}</td>
+                        <td class="view-cell">{{ album.num_songs }}</td>
+                        <td><input style="display: none" class="edit-cell" type="number" value="{{ album.num_songs }}"></td>
                     </tr>
                     <tr>
                         <td>Genres</td>
-                        <td>{% for tag in tags %} <a class="tagUrl" href="{% url 'tag' tag.name %}">{{ tag.name }}, </a> {% endfor %}</td>
+                        <td>{% for tag in tags %} <a class="tag-url" href="{% url 'tag' tag.name %}">{{ tag.name }}, </a> {% endfor %}</td>
+                    </tr>
+                    <tr id="image-url-cell" style="display: none">
+                        <td>Image Url</td>
+                        <td><input class="edit-cell" type="text" value="{{ album.image_url }}"></td>
                     </tr>
                 </table>
+                </form>
+                <input style="display: none" id="update-info-button" type="button" value="Update">
             </div>
         </div>
-    </div>
-
-
-{#    <input id="EditView" type="button" value="Edit" onclick="hideListItems()">#}
-
-{#    <form method="post" action="{% url 'update_album' %}">#}
-{#        <label style="display: none" for="album_name_edit">Album:</label>#}
-{#        <input style="display: none" id="album_name_edit" name="album_name_edit" value="{{ album.name }}">#}
-{#        <label style="display: none" for="artist_name_edit">Artist:</label>#}
-{#        <input style="display: none" id="artist_name_edit" name="artist_name_edit" value="{{ album.artist }}">#}
-{#        <label style="display: none" for="album_release_date_edit">Release date:</label>#}
-{#        <input style="display: none" id="album_release_date_edit" type="date" value="{{ album.release_date }}">#}
-{#        <label style="display: none" for="album_num_songs_edit">No. tracks</label>#}
-{#        <input style="display: none" id="album_num_songs_edit" value="{{ album.num_songs }}">#}
-{#    </form>#}
-
+    </section>
 </body>
 </html>

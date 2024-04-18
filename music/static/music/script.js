@@ -1,4 +1,4 @@
-function hideListItems() {
+function editAlbumInfo() {
     const button = document.querySelector('#edit-button')
     let viewCells = document.querySelectorAll('.view-cell')
     let editCells = document.querySelectorAll('.edit-cell')
