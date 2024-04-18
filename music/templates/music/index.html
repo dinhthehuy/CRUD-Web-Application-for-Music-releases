@@ -9,6 +9,11 @@
     <script src="{% static 'music/script.js' %}"></script>
 </head>
 <body>
+    <section id="home-nav-bar">
+        <a class="nav-bar-url" href="{% url 'index' %}">Home</a>
+        <a class="nav-bar-url" href="{% url 'index' %}">Recommendations</a>
+        <a class="nav-bar-url" href="{% url 'index' %}">My logs</a>
+    </section>
     <section>
         <form method="get" action="{% url 'search' %}">
             <table>
@@ -24,10 +29,12 @@
             <input type="submit" value="Search">
         </form>
     </section>
+
     <h2>So far you've listened to {{ count }} different albums</h2>
-    <section>
+
+    <section id="homepage-main-content">
         {% if logged_albums %}
-        <table>
+        <table id="album-log-table">
             <thead>
                 <tr>
                     <th></th>
@@ -49,13 +56,18 @@
                     </td>
                     <td>{{ log.logged_date }}</td>
                     <td><img class="logged_album_cover_art" src={{ log.album.image_url }}></td>
-                    <td><a href="{% url 'albums' log.album_id %}">{{ log.album }}</a></td>
-                    <td><a href="{% url 'artists' log.artist_id %}">{{ log.artist.name }}</a></td>
+                    <td><a class="album-url" href="{% url 'albums' log.album_id %}">{{ log.album }}</a></td>
+                    <td><a class="artist-url" href="{% url 'artists' log.artist_id %}">{{ log.artist.name }}</a></td>
                     <td>{{ log.album.release_date|date:"Y" }}</td>
                 </tr>
             {% endfor %}
         </table>
         {% endif %}
+        <aside>
+            <strong><label for="user-note">Note</label></strong>
+            <textarea id="user-note" placeholder="Enter your note here" rows="15" cols="30" data-height="50px"></textarea>
+            <input type="button" value="Save">
+        </aside>
     </section>
 </body>
 </html>

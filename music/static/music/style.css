@@ -1,18 +1,53 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: #152238;
+    background: #0b0e19;
     color: #d8dde6;
+    margin: 0;
 }
 
-a {
+#home-nav-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    background: #152238;
+    padding: 15px;
+}
+
+#homepage-main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#album-log-table {
+    width: 75%;
+}
+
+aside {
+    margin-top: 0.3%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#user-note {
+    margin-top: 3%;
+}
+
+.album-url, .artist-url {
     color: #84c5fb;
     text-decoration: none;
 }
 
-a:hover {
+.album-url, .artist-url {
     color: #84fffb;
+}
+
+.nav-bar-url {
+    text-decoration: none;
+    color: #d8dde6;
 }
 
 .logged_album_cover_art {
@@ -20,19 +55,6 @@ a:hover {
     max-height: 50px;
 }
 
-.found_album_cover_art {
-    max-width: 300px;
-    max-height: 300px;
-}
-
-.log_date_col {
-    /*width: 150px;*/
-}
-
-.album_name_col {
-    width: 450px;
-}
-
-.artist_name_col {
-    width: 250px;
+button {
+    background-color: red;
 }
