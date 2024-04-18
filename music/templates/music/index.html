@@ -55,7 +55,7 @@
                         </form>
                     </td>
                     <td>{{ log.logged_date }}</td>
-                    <td><img class="logged_album_cover_art" src={{ log.album.image_url }}></td>
+                    <td><img class="logged_album_cover_art" alt="{{ log.album }}" src={{ log.album.image_url }}></td>
                     <td><a class="album-url" href="{% url 'albums' log.album_id %}">{{ log.album }}</a></td>
                     <td><a class="artist-url" href="{% url 'artists' log.artist_id %}">{{ log.artist.name }}</a></td>
                     <td>{{ log.album.release_date|date:"Y" }}</td>
