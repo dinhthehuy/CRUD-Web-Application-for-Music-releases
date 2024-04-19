@@ -34,12 +34,12 @@
                     <tr>
                         <td>Released</td>
                         <td class="view-cell">{{ album.release_date }}</td>
-                        <td><input style="display: none" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}"></td>
+                        <td><input style="display: none" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}" required></td>
                     </tr>
                     <tr>
                         <td id="num-track-col">No. tracks</td>
                         <td class="view-cell">{{ album.num_songs }}</td>
-                        <td><input style="display: none" class="edit-cell" type="number" value="{{ album.num_songs }}"></td>
+                        <td><input style="display: none" class="edit-cell" type="number" value="{{ album.num_songs }}" required></td>
                     </tr>
                     <tr>
                         <td>Genres</td>
@@ -47,7 +47,7 @@
                     </tr>
                     <tr id="image-url-cell" style="display: none">
                         <td>Image Url</td>
-                        <td><input class="edit-cell" type="text" value="{{ album.image_url }}"></td>
+                        <td><input id="cover-art-url" class="edit-cell" type="text" value="{{ album.image_url }}" oninput="updateAlbumInfoCoverArt()" required></td>
                     </tr>
                 </table>
                 </form>

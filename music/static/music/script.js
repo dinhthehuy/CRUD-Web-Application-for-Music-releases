@@ -33,6 +33,18 @@ function updateSearchResultImage() {
     const imageUrl = document.getElementById('image_url').value
     const background = document.getElementById('background-image')
     const coverArt = document.getElementById('found-album-cover-art')
-    background.src = imageUrl
-    coverArt.src = imageUrl
+    setTimeout(function () {
+        background.src = imageUrl
+        coverArt.src = imageUrl
+    }, 500)
+}
+
+function updateAlbumInfoCoverArt() {
+    const imageUrl = document.getElementById('cover-art-url').value
+    const background = document.getElementById('background-image')
+    const coverArt = document.getElementById('album-cover')
+    setTimeout(function () {
+        background.src = imageUrl
+        coverArt.src = imageUrl
+    }, 500)
 }
