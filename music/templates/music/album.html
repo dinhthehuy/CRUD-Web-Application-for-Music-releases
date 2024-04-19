@@ -26,30 +26,30 @@
                 <h1>{{ album.name }}</h1>
                 <input id="edit-button" type="button" value="Edit" onclick="editAlbumInfo()">
                 <form method="post" action="">
-                <table id="album-info-table">
-                    <tr>
-                        <td>Artist</td>
-                        <td><a class="artist-url" href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></td>
-                    </tr>
-                    <tr>
-                        <td>Released</td>
-                        <td class="view-cell">{{ album.release_date }}</td>
-                        <td><input style="display: none" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}" required></td>
-                    </tr>
-                    <tr>
-                        <td id="num-track-col">No. tracks</td>
-                        <td class="view-cell">{{ album.num_songs }}</td>
-                        <td><input style="display: none" class="edit-cell" type="number" value="{{ album.num_songs }}" required></td>
-                    </tr>
-                    <tr>
-                        <td>Genres</td>
-                        <td>{% for tag in tags %} <a class="tag-url" href="{% url 'tag' tag.name %}">{{ tag.name }}, </a> {% endfor %}</td>
-                    </tr>
-                    <tr id="image-url-cell" style="display: none">
-                        <td>Image Url</td>
-                        <td><input id="cover-art-url" class="edit-cell" type="text" value="{{ album.image_url }}" oninput="updateAlbumInfoCoverArt()" required></td>
-                    </tr>
-                </table>
+                    <table id="album-info-table">
+                        <tr>
+                            <td class="cell-label">Artist</td>
+                            <td><a class="artist-url" href="{% url 'artists' album.artist_id %}">{{ album.artist }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="cell-label">Released</td>
+                            <td class="view-cell">{{ album.release_date }}</td>
+                            <td><input style="display: none" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}" required></td>
+                        </tr>
+                        <tr>
+                            <td class="cell-label">No. tracks</td>
+                            <td class="view-cell">{{ album.num_songs }}</td>
+                            <td><input style="display: none" class="edit-cell" type="number" value="{{ album.num_songs }}" required></td>
+                        </tr>
+                        <tr>
+                            <td class="cell-label">Genres</td>
+                            <td>{% for tag in tags %} <a class="tag-url" href="{% url 'tag' tag.name %}">{{ tag.name }}, </a> {% endfor %}</td>
+                        </tr>
+                        <tr id="image-url-cell" style="display: none">
+                            <td class="cell-label">Image Url</td>
+                            <td><input id="cover-art-url" class="edit-cell" type="text" value="{{ album.image_url }}" oninput="updateAlbumInfoCoverArt()" required></td>
+                        </tr>
+                    </table>
                 </form>
                 <input style="display: none" id="update-info-button" type="button" value="Update">
             </div>

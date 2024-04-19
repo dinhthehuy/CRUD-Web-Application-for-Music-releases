@@ -73,13 +73,14 @@ body {
     border-collapse: separate;
 }
 
+.cell-label {
+    width: 100px;
+    /*white-space:nowrap;*/
+}
+
 .artist-url, .tag-url {
     text-decoration: none;
     color: #84c5fb;
-}
-
-#num-track-col {
-    width: 25%;
 }
 
 #edit-button, #update-info-button {
