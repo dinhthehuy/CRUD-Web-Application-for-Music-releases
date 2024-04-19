@@ -14,16 +14,16 @@
         <a class="nav-bar-url" href="{% url 'index' %}">Recommendations</a>
         <a class="nav-bar-url" href="{% url 'index' %}">My logs</a>
     </section>
-    <section>
+    <section id="homepage-search-form">
         <form method="get" action="{% url 'search' %}">
             <table>
                 <tr>
                     <td><label for="album_name">Release:</label></td>
-                    <td><input type="text" id="album_name" name="album_name"></td>
+                    <td><input type="text" id="album_name" name="album_name" required></td>
                 </tr>
                 <tr>
                     <td><label for="artist_name">Artist: </label></td>
-                    <td><input type="text" id="artist_name" name="artist_name"></td>
+                    <td><input type="text" id="artist_name" name="artist_name" required></td>
                 </tr>
             </table>
             <input type="submit" value="Search">

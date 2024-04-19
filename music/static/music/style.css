@@ -14,6 +14,10 @@ body {
     padding: 15px;
 }
 
+#homepage-search-form {
+    margin-top: 1%;
+}
+
 #homepage-main-content {
     width: 100%;
     display: flex;
@@ -39,10 +43,6 @@ aside {
 .album-url, .artist-url {
     color: #84c5fb;
     text-decoration: none;
-}
-
-.album-url, .artist-url {
-    color: #84fffb;
 }
 
 .nav-bar-url {
