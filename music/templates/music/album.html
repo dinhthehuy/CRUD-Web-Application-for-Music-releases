@@ -25,7 +25,8 @@
             <div id="album-info-container">
                 <h1>{{ album.name }}</h1>
                 <input id="edit-button" type="button" value="Edit" onclick="editAlbumInfo()">
-                <form method="post" action="">
+                <form method="post" action="{% url 'update' album.mbid %}">
+                    {% csrf_token %}
                     <table id="album-info-table">
                         <tr>
                             <td class="cell-label">Artist</td>
@@ -34,12 +35,12 @@
                         <tr>
                             <td class="cell-label">Released</td>
                             <td class="view-cell">{{ album.release_date }}</td>
-                            <td><input style="display: none" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}" required></td>
+                            <td><input style="display: none" name="release-date-edit" class="edit-cell" type="date" value="{{ album.release_date|date:"Y-m-d"  }}" required></td>
                         </tr>
                         <tr>
                             <td class="cell-label">No. tracks</td>
                             <td class="view-cell">{{ album.num_songs }}</td>
-                            <td><input style="display: none" class="edit-cell" type="number" value="{{ album.num_songs }}" required></td>
+                            <td><input style="display: none" name="num-songs-edit" class="edit-cell" type="number" value="{{ album.num_songs }}" required></td>
                         </tr>
                         <tr>
                             <td class="cell-label">Genres</td>
@@ -47,11 +48,11 @@
                         </tr>
                         <tr id="image-url-cell" style="display: none">
                             <td class="cell-label">Image Url</td>
-                            <td><input id="cover-art-url" class="edit-cell" type="text" value="{{ album.image_url }}" oninput="updateAlbumInfoCoverArt()" required></td>
+                            <td><input id="cover-art-url" name="cover-art-url-edit" class="edit-cell" type="text" value="{{ album.image_url }}" oninput="updateAlbumInfoCoverArt()" required></td>
                         </tr>
                     </table>
+                    <input style="display: none" id="update-info-button" type="submit" value="Update">
                 </form>
-                <input style="display: none" id="update-info-button" type="button" value="Update">
             </div>
         </div>
     </section>
