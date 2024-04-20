@@ -28,6 +28,10 @@ body {
     padding: 15px;
 }
 
+.nav-bar-url:hover {
+    background-color: #2c4062;
+}
+
 #homepage-search-form {
     margin-left: 15px;
     margin-top: 5%;
@@ -62,6 +66,10 @@ aside {
 .album-url, .artist-url {
     color: #84c5fb;
     text-decoration: none;
+}
+
+.album-url:hover, .artist-url:hover {
+    color: #d8dde6;
 }
 
 .logged_album_cover_art {
