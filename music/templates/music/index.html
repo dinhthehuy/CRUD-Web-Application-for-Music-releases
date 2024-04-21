@@ -42,7 +42,7 @@
                         <th></th>
                         <th class="log_date_col">Date</th>
                         <th></th>
-                        <th class="album_name_col">Album</th>
+                        <th class="album_name_col">Release</th>
                         <th class="artist_name_col">Artist</th>
                         <th class="release_year_col">Year</th>
                     </tr>
@@ -53,7 +53,7 @@
                         <td>
                             <form method="post" action="{% url 'delete' log.id %}">
                                 {% csrf_token %}
-                                <input type="submit" value="X">
+                                <input id="delete-log-button" type="submit" value="X">
                             </form>
                         </td>
                         <td>{{ log.logged_date }}</td>

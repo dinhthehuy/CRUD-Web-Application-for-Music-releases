@@ -49,6 +49,19 @@ h2 {
 
 #album-log-table {
     width: 75%;
+    border-spacing: 0.5em 0;
+}
+
+#delete-log-button {
+    background: #bf0a30;
+    border: 1px solid black;
+    color: #d8dde6;
+    font-weight: bolder;
+    border-radius: 5px;
+}
+
+#delete-log-button:hover {
+    background-color: #ef0a30;
 }
 
 aside {
