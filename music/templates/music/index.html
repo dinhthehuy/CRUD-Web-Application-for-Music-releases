@@ -32,10 +32,18 @@
             </form>
         </section>
 
-        <h2>So far you've listened to {{ count }} different albums</h2>
+        <h2>So far you've listened to {{ count }} different album{{ count|pluralize }} and visited this site {{ num_visits }} time{{ num_visits|pluralize }}</h2>
         <span style="margin-left: 25px">
         {% for i in page_range %}
-            <a href="{% url 'log' %}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+            {% if i == page_num %}
+                <a class="page-url" href="{% url 'log' %}?page={{ i }}" style="background-color: #006ed1; color: #d8dde6">{{ i }}</a>
+            {% else %}
+                {% if i == paginator.ELLIPSIS %}
+                    <a>{{ paginator.ELLIPSIS }}</a>
+                {% else %}
+                    <a class="page-url" href="{% url 'log' %}?page={{ i }}">{{ i }}</a>
+                {% endif %}
+            {% endif %}
         {% endfor %}
         </span>
         <section id="homepage-main-content">

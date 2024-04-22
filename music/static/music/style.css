@@ -42,6 +42,7 @@ h2 {
 }
 
 #homepage-main-content {
+    margin-top: 15px;
     margin-left: 15px;
     display: flex;
     flex-direction: row;
@@ -77,12 +78,17 @@ aside {
     margin-top: 3%;
 }
 
-.album-url, .artist-url {
+.page-url {
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+
+.album-url, .artist-url, .page-url {
     color: #84c5fb;
     text-decoration: none;
 }
 
-.album-url:hover, .artist-url:hover {
+.album-url:hover, .artist-url:hover, .page-url:hover {
     color: #d8dde6;
 }
 

@@ -15,26 +15,29 @@ USER_AGENT = 'get_last_fm_data'
 API_KEY = '101e8482407f74afceac4b4b38c19322'
 url = 'https://ws.audioscrobbler.com/2.0/'
 mbz.set_useragent('get_data', '0.1')
-
+log_per_page = 20
 
 # Create your views here.
 def index(request):
     logged_albums = Log.objects.order_by('-logged_date')
-    p = Paginator(logged_albums, 10)
+    p = Paginator(logged_albums, log_per_page)
     log_count = Log.objects.count()
-    return render(request, 'music/index.html',
-                  {'logged_albums': p.page(1).object_list, 'count': log_count,
-                          'page_range': p.page_range}
-                  )
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+    return render(request, 'music/index.html',{'logged_albums': p.page(1).object_list, 'count': log_count,
+                                                                    'page_range': p.get_elided_page_range(1), 'num_visits': num_visits,
+                                                                    'page_num': 1, 'paginator': p})
 
 
 def get_log_pagination(request):
-    logged_albums = Log.objects.order_by('-logged_date').all()
-    p = Paginator(logged_albums, 10)
-    page_num = request.GET.get('page')
-    return render(request, 'music/index.html', {'logged_albums': p.page(page_num).object_list,
-                                                                    'count': Log.objects.count(),
-                                                                    'page_range': p.page_range})
+    logged_albums = Log.objects.order_by('-logged_date')
+    p = Paginator(logged_albums, log_per_page)
+    page_num = int(request.GET.get('page'))
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+    return render(request, 'music/index.html', {'logged_albums': p.page(page_num).object_list, 'count': Log.objects.count(),
+                                                                    'num_visits': num_visits, 'page_range': p.get_elided_page_range(page_num),
+                                                                    'page_num': page_num, 'paginator': p})
 
 
 def get_album(request, album_id):
