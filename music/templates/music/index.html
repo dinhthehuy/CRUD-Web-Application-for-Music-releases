@@ -33,7 +33,11 @@
         </section>
 
         <h2>So far you've listened to {{ count }} different albums</h2>
-
+        <span style="margin-left: 25px">
+        {% for i in page_range %}
+            <a href="{% url 'log' %}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+        {% endfor %}
+        </span>
         <section id="homepage-main-content">
             {% if logged_albums %}
             <table id="album-log-table">
@@ -49,7 +53,7 @@
                 </thead>
 
                 {% for log in logged_albums %}
-                    <tr>
+                    <tr class="entry-log-cell">
                         <td>
                             <form method="post" action="{% url 'delete' log.id %}">
                                 {% csrf_token %}

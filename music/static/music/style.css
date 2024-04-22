@@ -48,6 +48,7 @@ h2 {
 }
 
 #album-log-table {
+    height: fit-content;
     width: 75%;
     border-spacing: 0.5em 0;
 }

@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 
 import requests
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from musicbrainzngs import musicbrainz as mbz
@@ -19,8 +20,21 @@ mbz.set_useragent('get_data', '0.1')
 # Create your views here.
 def index(request):
     logged_albums = Log.objects.order_by('-logged_date')
+    p = Paginator(logged_albums, 10)
     log_count = Log.objects.count()
-    return render(request, 'music/index.html', {'logged_albums': logged_albums, 'count': log_count})
+    return render(request, 'music/index.html',
+                  {'logged_albums': p.page(1).object_list, 'count': log_count,
+                          'page_range': p.page_range}
+                  )
+
+
+def get_log_pagination(request):
+    logged_albums = Log.objects.order_by('-logged_date').all()
+    p = Paginator(logged_albums, 10)
+    page_num = request.GET.get('page')
+    return render(request, 'music/index.html', {'logged_albums': p.page(page_num).object_list,
+                                                                    'count': Log.objects.count(),
+                                                                    'page_range': p.page_range})
 
 
 def get_album(request, album_id):
