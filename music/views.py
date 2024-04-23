@@ -1,6 +1,6 @@
+import json
 import re
 from datetime import datetime
-
 import requests
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -22,22 +22,20 @@ def index(request):
     logged_albums = Log.objects.order_by('-logged_date')
     p = Paginator(logged_albums, log_per_page)
     log_count = Log.objects.count()
-    num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits + 1
+    user_note = request.session.get('user_note', '')
     return render(request, 'music/index.html',{'logged_albums': p.page(1).object_list, 'count': log_count,
-                                                                    'page_range': p.get_elided_page_range(1), 'num_visits': num_visits,
-                                                                    'page_num': 1, 'paginator': p})
+                                                                    'page_range': p.get_elided_page_range(1),
+                                                                    'page_num': 1, 'paginator': p, 'user_note': user_note})
 
 
 def get_log_pagination(request):
     logged_albums = Log.objects.order_by('-logged_date')
     p = Paginator(logged_albums, log_per_page)
     page_num = int(request.GET.get('page'))
-    num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits + 1
+    user_note = request.session.get('user_note', '')
     return render(request, 'music/index.html', {'logged_albums': p.page(page_num).object_list, 'count': Log.objects.count(),
-                                                                    'num_visits': num_visits, 'page_range': p.get_elided_page_range(page_num),
-                                                                    'page_num': page_num, 'paginator': p})
+                                                                    'page_range': p.get_elided_page_range(page_num),
+                                                                    'page_num': page_num, 'paginator': p, 'user_note': user_note})
 
 
 def get_album(request, album_id):
@@ -131,3 +129,9 @@ def update_album(request, album_id):
     album.image_url = request.POST.get('cover-art-url-edit')
     album.save()
     return redirect('albums', album_id=album_id)
+
+def save_note(request):
+    body = json.loads(request.body.decode('utf-8'))
+    content = body.get('user-note', '')
+    request.session['user_note'] = content
+    return JsonResponse(data={'status': 'OK', 'message': 'Note saved'}, status=200)

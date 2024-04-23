@@ -11,5 +11,6 @@ urlpatterns = [
     path('delete/<log_id>/', views.delete_log, name='delete'),
     path('update/<album_id>/', views.update_album, name='update'),
     path('tag/<path:album_tag>', views.get_albums_by_tag, name='tag'),
-    path('log', views.get_log_pagination, name='log')
+    path('log', views.get_log_pagination, name='log'),
+    path('save-note', views.save_note, name='save_note')
 ]

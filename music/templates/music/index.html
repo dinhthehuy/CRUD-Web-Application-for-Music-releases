@@ -32,7 +32,7 @@
             </form>
         </section>
 
-        <h2>So far you've listened to {{ count }} different album{{ count|pluralize }} and visited this site {{ num_visits }} time{{ num_visits|pluralize }}</h2>
+        <h2>So far you've listened to {{ count }} different album{{ count|pluralize }}</h2>
         <span style="margin-left: 25px">
         {% for i in page_range %}
             {% if i == page_num %}
@@ -80,8 +80,11 @@
 
             <aside>
                 <strong><label for="user-note">Note</label></strong>
-                <textarea id="user-note" placeholder="Enter your note here" rows="15" cols="30" data-height="50px"></textarea>
-                <input type="button" value="Save">
+{#                <form method="post" action={% url 'save_note' %}>#}
+{#                    {% csrf_token %}#}
+                    <textarea id="user-note" name="user-note" placeholder="Enter your note here" rows="15" cols="30" data-height="50px">{{ user_note }}</textarea>
+                    <input type="button" value="Save" onclick="saveNote()">
+{#                </form>#}
             </aside>
 
         </section>
