@@ -49,18 +49,17 @@ function updateAlbumInfoCoverArt() {
     }, 500)
 }
 
-async function saveNote() {
+function saveNote() {
     const note = document.getElementById('user-note').value
-
     fetch('http://localhost:5000/music/save-note', {
-        mode: 'cors',
         headers: {
+            "X-Requested-With": 'XMLHttpRequest',
             "Content-Type": "application/json",
             "X-CSRFToken": getCookie('csrftoken'),
         },
-        cache: 'no-cache',
+        mode: 'cors',
         method: 'POST',
-        credentials: "same-origin",
+        credentials: "include",
         body: JSON.stringify({'user-note': note})
     })
         .then(response => console.log(response.status))

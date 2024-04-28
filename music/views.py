@@ -131,7 +131,10 @@ def update_album(request, album_id):
     return redirect('albums', album_id=album_id)
 
 def save_note(request):
-    body = json.loads(request.body.decode('utf-8'))
-    content = body.get('user-note', '')
-    request.session['user_note'] = content
-    return JsonResponse(data={'status': 'OK', 'message': 'Note saved'}, status=200)
+    if request.method == 'POST':
+        # body = json.loads(request.body.decode('utf-8'))
+        # content = body.get('user-note', '')
+        content = request.POST.get('user-note')
+        request.session['user_note'] = content
+        return redirect('index')
+    return JsonResponse({'status': 'Invalid request'}, status=400)
