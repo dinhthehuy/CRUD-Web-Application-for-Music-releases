@@ -74,6 +74,11 @@ aside {
     align-items: start;
 }
 
+#save-note-form {
+    display: flex;
+    flex-direction: column;
+}
+
 #user-note {
     margin-top: 3%;
 }
