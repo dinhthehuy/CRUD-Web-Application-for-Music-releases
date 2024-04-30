@@ -30,32 +30,31 @@ This guide helps you set up a copy of the project on your local machine.
 
 ### Installation
 1. Clone the repository to your local machine:
-```
-git clone https://github.com/dinhthehuy/Music-info
+```console
+foo@bar:~$ git clone https://github.com/dinhthehuy/Music-info
 ```
 2. Navigate to project folder:
+```console
+foo@bar:~$ cd log-albums
 ```
-cd log-albums
-``` 
-4. Build docker compose image:
-- For development:
+### Development
+1. Build docker compose image:
+```console
+foo@bar:~$ docker compose -f docker-compose.yml build
 ```
-docker compose -f docker-compose.yml build
-```
-- For production:
-```
-docker compose -f docker-compose.prod.yml build 
-```
-5. Run docker compose container:
-
-For development:
-```
-docker compose -f docker-compose.yml up -d
+2. Run docker compose container
+```console
+foo@bar:~$ docker compose -f docker-compose.yml up -d
 ```
 Test it out at [http://localhost:5000/music/](http://localhost:5000/music/)
 
-For production:
+### Production
+1. Build docker compose image
+```console
+foo@bar:~$ docker compose -f docker-compose.prod.yml build 
 ```
-docker compose -f docker-compose.prod.yml up -d
+2. Run docker compose container
+```console
+foo@bar:~$ docker compose -f docker-compose.prod.yml up -d
 ```
 Test it out at [http://localhost:1337/music/](http://localhost:1337/music/)
