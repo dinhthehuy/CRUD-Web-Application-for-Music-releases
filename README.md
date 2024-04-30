@@ -14,7 +14,8 @@ This is a hobby project I created to learn web development and try out new tools
 - [x] Add pagination for logs 
 - [ ] Template for artist, tag and year
 - [ ] Filter for logs (by name, year,...)
-- [ ] Improve saving user's note with AJAX 
+- [ ] Improve saving user's note with AJAX
+- [ ] Deploy to vercel
 
 
 ## Getting Started
@@ -45,13 +46,12 @@ docker compose -f docker-compose.yml build
 docker compose -f docker-compose.prod.yml build 
 ```
 5. Run docker compose container:
-- For development: 
+- For development (localhost:5000/music/): 
 ```
 docker compose -f docker-compose.yml up -d
 ```
-localhost:5000/music/
-- For production:
+
+- For production (localhost:1337/music/):
 ```
-docker compose -f docker-compose.prod.yml
+docker compose -f docker-compose.prod.yml up -d
 ```
-  localhost:1337/music/
