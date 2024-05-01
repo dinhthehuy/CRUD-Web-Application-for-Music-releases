@@ -1,4 +1,6 @@
 .venv
 .idea
+.env
+.env.dev
 __pycache__
 staticfiles
