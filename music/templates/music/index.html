@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Logs</title>
+    <title>Home</title>
     <link rel="stylesheet" href="{% static 'music/style.css' %}">
     <script src="{% static 'music/script.js' %}"></script>
 </head>
@@ -30,7 +30,7 @@
             </form>
         </section>
 
-        <h2>So far you've listened to {{ count }} different album{{ count|pluralize }}</h2>
+        <h2>You have logged {{ count }} entr{{ count|pluralize:"y,ies" }}</h2>
         <span style="margin-left: 25px">
         {% for i in page_range %}
             {% if i == page_num %}
