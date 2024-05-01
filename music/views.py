@@ -2,6 +2,7 @@ import json
 import re
 from datetime import datetime
 import requests
+import environ
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -11,8 +12,10 @@ from .crud import insert_album, insert_logged_album, insert_artist, get_artist_b
     get_all_tags_by_album_id, get_all_albums_with_tag, get_album_by_id, get_all_albums_by_artist
 from .models import Log
 
+env = environ.Env()
+environ.Env.read_env()
 USER_AGENT = 'get_last_fm_data'
-API_KEY = '101e8482407f74afceac4b4b38c19322'
+API_KEY = env('API_KEY')
 url = 'https://ws.audioscrobbler.com/2.0/'
 mbz.set_useragent('get_data', '0.1')
 log_per_page = 20
