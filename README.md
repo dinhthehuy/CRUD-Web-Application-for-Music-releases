@@ -29,31 +29,55 @@ This guide helps you set up a copy of the project on your local machine.
 * Pycharm (Optional)
 
 ### Installation
-1. Clone the repository to your local machine:
+- Clone the repository to your local machine:
 ```console
 foo@bar:~$ git clone https://github.com/dinhthehuy/Music-info
 ```
-2. Navigate to project folder:
+- Navigate to project folder:
 ```console
 foo@bar:~$ cd log-albums
 ```
 ### Development
-1. Build docker compose image:
+- Create your own .env.dev file:
+```env
+DB_NAME=db_name
+DB_USER=db_user
+DB_PASSWORD=db_password
+DB_HOST=db_host
+DB_PORT=5432
+SECRET_KEY=django_secret
+API_KEY=lastfm_api_key
+DJANGO_ALLOWED_HOSTS=localhost
+DEBUG=0
+```
+- Build docker compose image:
 ```console
 foo@bar:~$ docker compose -f docker-compose.yml build
 ```
-2. Run docker compose container
+- Run docker compose container
 ```console
 foo@bar:~$ docker compose -f docker-compose.yml up -d
 ```
 Test it out at [http://localhost:5000/music/](http://localhost:5000/music/)
 
 ### Production
-1. Build docker compose image
+- Create your own .env file:
+```env
+DB_NAME=db_name
+DB_USER=db_user
+DB_PASSWORD=db_password
+DB_HOST=db_host
+DB_PORT=5432
+SECRET_KEY=django_secret
+API_KEY=lastfm_api_key
+DJANGO_ALLOWED_HOSTS=localhost
+DEBUG=1
+```
+- Build docker compose image
 ```console
 foo@bar:~$ docker compose -f docker-compose.prod.yml build 
 ```
-2. Run docker compose container
+- Run docker compose container
 ```console
 foo@bar:~$ docker compose -f docker-compose.prod.yml up -d
 ```
