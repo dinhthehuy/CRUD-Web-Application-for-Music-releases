@@ -46,7 +46,7 @@ DB_PASSWORD=db_password
 DB_HOST=db_host
 DB_PORT=5432
 SECRET_KEY=django_secret
-API_KEY=lastfm_api_key
+API_KEY=lastfm_api_key # Apply for api_key here: https://www.last.fm/api/account/create
 DJANGO_ALLOWED_HOSTS=localhost
 DEBUG=0
 ```
@@ -68,8 +68,8 @@ DB_USER=db_user
 DB_PASSWORD=db_password
 DB_HOST=db_host
 DB_PORT=5432
-SECRET_KEY=django_secret
-API_KEY=lastfm_api_key
+SECRET_KEY=django_secret 
+API_KEY=lastfm_api_key # Apply for api_key here: https://www.last.fm/api/account/create
 DJANGO_ALLOWED_HOSTS=localhost
 DEBUG=1
 ```
