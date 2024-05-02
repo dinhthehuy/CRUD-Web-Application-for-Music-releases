@@ -32,7 +32,7 @@ body {
 
 }
 
-.top-bar-url {
+.nav-bar-url {
     color: #d8dde6;
     text-decoration: none;
     padding: 15px;
@@ -85,4 +85,12 @@ body {
 
 #edit-button, #update-info-button {
     width: fit-content;
+}
+
+.nav-bar-url:hover {
+    background-color: #2c4062;
+}
+
+.tag-url:hover, .artist-url:hover, .nav-bar-url:hover {
+    color: #d8dde6;
 }
