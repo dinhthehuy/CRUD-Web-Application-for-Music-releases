@@ -2,6 +2,11 @@ body {
     margin-top: 0;
     background: rgba(24,34,54,.4);
     color: #d8dde6;
+    font-size: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
 }
 
 #background-image {

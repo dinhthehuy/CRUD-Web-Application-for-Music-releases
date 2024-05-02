@@ -5,6 +5,11 @@ body {
     color: #d8dde6;
     margin: 0 auto;
     align-items: center;
+    font-size: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
 }
 
 #content-wrapper {
@@ -61,8 +66,4 @@ body {
 
 .album-url:hover, .artist-url:hover, .nav-bar-url:hover {
     color: #d8dde6;
-}
-
-h1 {
-    font-size: 2em;
 }
