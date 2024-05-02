@@ -50,6 +50,8 @@ body {
 .album-grid-item {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+    margin-bottom: 25px;
 }
 
 .artist-url, .album-url {
@@ -59,4 +61,8 @@ body {
 
 .album-url:hover, .artist-url:hover, .nav-bar-url:hover {
     color: #d8dde6;
+}
+
+h1 {
+    font-size: 2em;
 }

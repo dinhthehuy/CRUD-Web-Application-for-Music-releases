@@ -18,7 +18,7 @@
             <div id="album-grid">
                 {% for album in albums %}
                     <div class="album-grid-item">
-                        <img class="tag-album-cover" src={{ album.image_url }}>
+                        <a href="{% url 'albums' album.mbid %}"><img class="tag-album-cover" src={{ album.image_url }}></a>
                         <a class="album-url" href="{% url 'albums' album.mbid %}">{{ album.name }}</a>
                         <b><a class="artist-url" href="{% url 'artists' album.artist.mbid %}">{{ album.artist.name }}</a></b>
                     </div>
