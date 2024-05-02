@@ -4,17 +4,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'music/style.css' %}">
-    <title>{{ tag }}</title>
+    <link rel="stylesheet" href="{% static 'music/tag.css' %}">
+    <title>{{ tag }} - Music genre</title>
 </head>
 <body>
-<a href="javascript:history.back()">Back</a>
-    <h1>{{ tag }}</h1>
-    <ul>
-        {% for album in albums %}
-        <li><a href="{% url 'albums' album.mbid %}">{{ album.name }}</a> ({{ album.release_date|date:"Y" }})</li>
-        {% endfor %}
-    </ul>
+    <section id="content-wrapper">
+        <nav id="home-nav-bar">
+            <a class="nav-bar-url" href="{% url 'index' %}">Home</a>
+        </nav>
 
+        <section id="tag-album-list-container">
+            <h2>Genre: {{ tag }}</h2>
+            <div id="album-grid">
+                {% for album in albums %}
+                    <div class="album-grid-item">
+                        <img class="tag-album-cover" src={{ album.image_url }}>
+                        <a class="album-url" href="{% url 'albums' album.mbid %}">{{ album.name }}</a>
+                        <b><a class="artist-url" href="{% url 'artists' album.artist.mbid %}">{{ album.artist.name }}</a></b>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+    </section>
 </body>
 </html>
