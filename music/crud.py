@@ -22,7 +22,7 @@ def get_all_tags_by_album_id(album_id):
 
 
 def get_all_albums_with_tag(tag):
-    return AlbumTag.objects.filter(name=tag)
+    return AlbumTag.objects.filter(name=tag).order_by('-count')
 
 
 def get_all_albums_by_artist(artist_id):
