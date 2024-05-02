@@ -21,7 +21,7 @@
             </div>
 
             <div id="album-info-container">
-                <h1>{{ album.name }}</h1>
+                <h2>{{ album.name }}</h2>
                 <input id="edit-button" type="button" value="Edit" onclick="editAlbumInfo()">
                 <form method="post" action="{% url 'update' album.mbid %}">
                     {% csrf_token %}
