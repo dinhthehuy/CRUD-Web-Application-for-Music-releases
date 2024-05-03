@@ -10,32 +10,32 @@ This is a hobby project I started out to learn web development and try out tools
 ### Screenshots 
 <p align="center">
   <img src="./img/Home.png" alt="Homepage" title="Homepage">
-  Homepage
+  <em>Homepage</em>
 </p>
 
 <p align="center">
   <img src="./img/Search_result.png" alt="search_result" title="Search result">
-  Search result
+  <em>Search result</em>
 </p>
 
 <p align="center">
   <img src="./img/Album_info.png" alt="album_info" title="Album info">
-  Album info
+  <em>Album info</em>
 </p>
 
 <p align="center">
   <img src="./img/Album_edit.png" alt="album_edit" title="Album info edit">
-  Album info edit
+  <em>Album info edit</em>
 </p>
 
 <p align="center">
   <img src="./img/Artist.png" alt="artist" title="Artist's discography">
-  Artist's discography (from what you logged so far)
+  <em>Artist's discography (from what you've logged so far)</em>
 </p>
 
 <p align="center">
   <img src="./img/Genre.png" alt="genre" title="Genre's releases">
-  Genre's releases (from what you logged so far)
+  <em>Genre's releases (from what you've logged so far)</em>
 </p>
 
 ### To do
