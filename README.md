@@ -8,18 +8,35 @@ A simple CRUD web application used for looking up basic information about music 
 This is a hobby project I started out to learn web development and try out tools such as Docker, Gunicorn, and Nginx. The project contains both Docker Compose files for development and production. The latter uses Gunicorn as a WSGI production-level server and Nginx to serve the static files (HTML, CSS, JS).
 
 ### Screenshots 
-<img src="./img/Home.png" alt="Homepage" title="Homepage">
+<p align="center">
+  <img src="./img/Home.png" alt="Homepage" title="Homepage">
+  Homepage
+</p>
 
-<img src="./img/Search_result.png" alt="search_result" title="Search result">
+<p align="center">
+  <img src="./img/Search_result.png" alt="search_result" title="Search result">
+  Search result
+</p>
 
-<img src="./img/Album_info.png" alt="album_info" title="Album info">
+<p align="center">
+  <img src="./img/Album_info.png" alt="album_info" title="Album info">
+  Album info
+</p>
 
-<img src="./img/Album_edit.png" alt="album_edit" title="Album info edit">
+<p align="center">
+  <img src="./img/Album_edit.png" alt="album_edit" title="Album info edit">
+  Album info edit
+</p>
 
-<img src="./img/Artist.png" alt="artist" title="Artist's discography">
+<p align="center">
+  <img src="./img/Artist.png" alt="artist" title="Artist's discography">
+  Artist's discography (from what you logged so far)
+</p>
 
-<img src="./img/Genre.png" alt="genre" title="Genre's releases">
-
+<p align="center">
+  <img src="./img/Genre.png" alt="genre" title="Genre's releases">
+  Genre's releases (from what you logged so far)
+</p>
 
 ### To do
 - [x] User's note can be saved in session and retrieved from database
