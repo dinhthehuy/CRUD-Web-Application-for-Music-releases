@@ -5,7 +5,6 @@ import requests
 import environ
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.middleware.csrf import get_token
 from django.shortcuts import render, redirect
 from musicbrainzngs import musicbrainz as mbz
 
@@ -136,10 +135,9 @@ def update_album(request, album_id):
 
 def save_note(request):
     if request.method == 'POST':
-        body = json.loads(request.body.decode('utf-8'))
-        content = body.get('user-note', '')
-        # print(f"CSRF Cookie: {get_token(request)}")
-        # content = request.POST.get(content)
+        # body = json.loads(request.body.decode('utf-8'))
+        # content = body.get('user-note', '')
+        content = request.POST.get('user-note')
         request.session['user_note'] = content
-        # return redirect('index')
-        return JsonResponse({'msg': 'nice request'}, status=200)
+        return redirect('index')
+    return JsonResponse({'status': 'Invalid request'}, status=400)

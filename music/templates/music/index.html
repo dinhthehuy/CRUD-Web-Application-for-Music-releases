@@ -78,10 +78,10 @@
 
             <aside>
                 <strong><label for="user-note">Note</label></strong>
-                <form id="save-note-form" method="post">
+                <form id="save-note-form" method="post" action="{% url 'save_note' %}">
                     {% csrf_token %}
                     <textarea id="user-note" name="user-note" placeholder="Enter your note here" rows="15" cols="30" data-height="50px">{{ user_note }}</textarea>
-                    <input style="width: fit-content" type="button" value="Save" onclick="saveNote()">
+                    <input style="width: fit-content" type="submit" value="Save">
                 </form>
             </aside>
         </section>
