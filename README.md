@@ -8,15 +8,23 @@ A simple CRUD web application used for looking up basic information about music 
 This is a hobby project I started out to learn web development and try out tools such as Docker, Gunicorn, and Nginx. The project contains both Docker Compose files for development and production. The latter uses Gunicorn as a WSGI production-level server and Nginx to serve the static files (HTML, CSS, JS).
 
 ### Screenshots 
-<img src="./img/Home.png" alt="Homepage">
-<img src="./img/Search_result.png" alt="Search_result">
-<img src="./img/Album_info.png" alt="album_info">
-<img src="./img/Album_edit.png" alt="album_edit">
+<img src="./img/Home.png" alt="Homepage" title="Homepage">
+
+<img src="./img/Search_result.png" alt="search_result" title="Search result">
+
+<img src="./img/Album_info.png" alt="album_info" title="Album info">
+
+<img src="./img/Album_edit.png" alt="album_edit" title="Album info edit">
+
+<img src="./img/Artist.png" alt="artist" title="Artist's discography">
+
+<img src="./img/Genre.png" alt="genre" title="Genre's releases">
+
 
 ### To do
 - [x] User's note can be saved in session and retrieved from database
 - [x] Add pagination for logs 
-- [ ] Template for artist, tag and year
+- [x] Template for artist, tag and year
 - [ ] Filter for logs (by name, year,...)
 - [ ] Improve saving user's note with AJAX
 - [ ] Deploy to vercel
