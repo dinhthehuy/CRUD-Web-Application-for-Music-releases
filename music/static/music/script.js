@@ -62,7 +62,7 @@ function saveNote() {
         credentials: "include",
         body: JSON.stringify({'user-note': note})
     })
-        .then(response => console.log(response.status))
+        .then(response => console.log(response.body))
 }
 
 function getCookie(name) {
