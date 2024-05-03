@@ -44,7 +44,7 @@ This is a hobby project I started out to learn web development and try out tools
 - [x] Template for artist, tag and year
 - [ ] Filter for logs (by name, year,...)
 - [ ] Improve saving user's note with AJAX
-- [ ] Deploy to vercel
+- [ ] Deploy to somewhere that supports running docker compose instances 
 - [ ] New feature: Music recommendation
 
 
