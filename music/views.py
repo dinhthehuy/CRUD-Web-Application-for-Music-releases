@@ -1,4 +1,3 @@
-import json
 import re
 from datetime import datetime
 import requests
@@ -19,16 +18,18 @@ API_KEY = env('API_KEY')
 url = 'https://ws.audioscrobbler.com/2.0/'
 mbz.set_useragent('get_data', '0.1')
 log_per_page = 20
+log_count = Log.objects.count()
 
 # Create your views here.
 def index(request):
     logged_albums = Log.objects.order_by('-logged_date')
     p = Paginator(logged_albums, log_per_page)
-    log_count = Log.objects.count()
     user_note = request.session.get('user_note', '')
-    return render(request, 'music/index.html',{'logged_albums': p.page(1).object_list, 'count': log_count,
+    return render(request, 'music/index.html',{'logged_albums': p.page(1).object_list,
+                                                                    'count': log_count,
                                                                     'page_range': p.get_elided_page_range(1),
-                                                                    'page_num': 1, 'paginator': p, 'user_note': user_note})
+                                                                    'page_num': 1, 'paginator': p,
+                                                                    'user_note': user_note})
 
 
 def get_log_pagination(request):
@@ -143,11 +144,14 @@ def save_note(request):
     return JsonResponse({'status': 'Invalid request'}, status=400)
 
 def get_log_by_year(request):
-    year = request.GET.get('year')
-    result = get_log_by_release_year(year)
-    p = Paginator(result, log_per_page)
-    log_count = Log.objects.count()
+    if request.GET.get('filter-by') == 'release-year':
+        year = request.GET.get('year')
+        result = get_log_by_release_year(year)
+        p = Paginator(result, log_per_page)
+
     user_note = request.session.get('user_note', '')
-    return render(request, 'music/index.html', {'logged_albums': p.page(1).object_list, 'count': log_count,
-                                                'page_range': p.get_elided_page_range(1),
-                                                'page_num': 1, 'paginator': p, 'user_note': user_note})
+    return render(request, 'music/index.html', {'logged_albums': p.page(1).object_list,
+                                                                    'count': log_count,
+                                                                    'page_range': p.get_elided_page_range(1),
+                                                                    'page_num': 1, 'paginator': p,
+                                                                    'user_note': user_note})

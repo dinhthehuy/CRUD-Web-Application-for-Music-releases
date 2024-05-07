@@ -46,10 +46,10 @@
         </span>
 
         <form method="get" action="{% url 'log_by_year' %}">
-            <select>
-                <option>Year</option>
+            <select name="filter-by">
+                <option value="release-year">Release Year</option>
             </select>
-            <input type="number" id="year" name="year" required>
+            <input type="number" name="year" required>
             <input type="submit" value="Filter">
         </form>
 
