@@ -31,27 +31,29 @@
         </section>
 
         <h2>You have logged {{ count }} entr{{ count|pluralize:"y,ies" }}</h2>
-        <span style="margin-left: 25px">
-        {% for i in page_range %}
-            {% if i == page_num %}
-                <a class="page-url" href="{% url 'log' %}?page={{ i }}" style="background-color: #006ed1; color: #d8dde6">{{ i }}</a>
-            {% else %}
-                {% if i == paginator.ELLIPSIS %}
-                    <a>{{ paginator.ELLIPSIS }}</a>
+        <div id="pagination-and-filter-container">
+            <span>
+            {% for i in page_range %}
+                {% if i == page_num %}
+                    <a class="page-url" href="{% url 'log' %}?page={{ i }}" style="background-color: #006ed1; color: #d8dde6">{{ i }}</a>
                 {% else %}
-                    <a class="page-url" href="{% url 'log' %}?page={{ i }}">{{ i }}</a>
+                    {% if i == paginator.ELLIPSIS %}
+                        <a>{{ paginator.ELLIPSIS }}</a>
+                    {% else %}
+                        <a class="page-url" href="{% url 'log' %}?page={{ i }}">{{ i }}</a>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-        {% endfor %}
-        </span>
+            {% endfor %}
+            </span>
 
-        <form method="get" action="{% url 'log_by_year' %}">
-            <select name="filter-by">
-                <option value="release-year">Release Year</option>
-            </select>
-            <input type="number" name="year" required>
-            <input type="submit" value="Filter">
-        </form>
+            <form method="get" action="{% url 'log_by_year' %}">
+                <select name="filter-by">
+                    <option value="release-year">Release Year</option>
+                </select>
+                <input type="number" name="year" required>
+                <input type="submit" value="Filter">
+            </form>
+        </div>
 
         <section id="homepage-main-content">
             {% if logged_albums %}
