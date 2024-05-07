@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from musicbrainzngs import musicbrainz as mbz
 
 from .crud import insert_album, insert_logged_album, insert_artist, get_artist_by_id, insert_album_tag, \
-    get_all_tags_by_album_id, get_all_albums_with_tag, get_album_by_id, get_all_albums_by_artist
+    get_all_tags_by_album_id, get_all_albums_with_tag, get_album_by_id, get_all_albums_by_artist, get_log_by_release_year
 from .models import Log
 
 env = environ.Env()
@@ -141,3 +141,13 @@ def save_note(request):
         request.session['user_note'] = content
         return redirect('index')
     return JsonResponse({'status': 'Invalid request'}, status=400)
+
+def get_log_by_year(request):
+    year = request.GET.get('year')
+    result = get_log_by_release_year(year)
+    p = Paginator(result, log_per_page)
+    log_count = Log.objects.count()
+    user_note = request.session.get('user_note', '')
+    return render(request, 'music/index.html', {'logged_albums': p.page(1).object_list, 'count': log_count,
+                                                'page_range': p.get_elided_page_range(1),
+                                                'page_num': 1, 'paginator': p, 'user_note': user_note})

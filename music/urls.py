@@ -12,5 +12,6 @@ urlpatterns = [
     path('update/<album_id>/', views.update_album, name='update'),
     path('tag/<path:album_tag>', views.get_albums_by_tag, name='tag'),
     path('log', views.get_log_pagination, name='log'),
-    path('save-note', views.save_note, name='save_note')
+    path('log/year', views.get_log_by_year, name='log_by_year'),
+    path('save-note', views.save_note, name='save_note'),
 ]

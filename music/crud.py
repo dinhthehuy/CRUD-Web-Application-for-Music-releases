@@ -12,6 +12,9 @@ def get_artist_by_id(artist_id):
 def get_log(album_id):
     return Log.objects.filter(album=album_id).first()
 
+def get_log_by_release_year(year):
+    return Log.objects.filter(album__release_date__year=f"{year}")
+
 
 def get_all_logged_albums():
     return Log.objects.all()

@@ -44,6 +44,15 @@
             {% endif %}
         {% endfor %}
         </span>
+
+        <form method="get" action="{% url 'log_by_year' %}">
+            <select>
+                <option>Year</option>
+            </select>
+            <input type="number" id="year" name="year" required>
+            <input type="submit" value="Filter">
+        </form>
+
         <section id="homepage-main-content">
             {% if logged_albums %}
             <table id="album-log-table">
