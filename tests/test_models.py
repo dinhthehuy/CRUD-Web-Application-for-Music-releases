@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import Artist, Album, Log, AlbumTag
+from music.models import Artist, Album, Log, AlbumTag
 
 class TestArtist(TestCase):
     @classmethod
