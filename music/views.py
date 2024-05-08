@@ -32,14 +32,14 @@ def index(request):
                                                                     'user_note': user_note})
 
 
-def get_log_pagination(request):
+def get_log_pagination(request, page_number):
     logged_albums = Log.objects.order_by('-logged_date')
     p = Paginator(logged_albums, log_per_page)
-    page_num = int(request.GET.get('page'))
+    page_number = int (page_number)
     user_note = request.session.get('user_note', '')
-    return render(request, 'music/index.html', {'logged_albums': p.page(page_num).object_list, 'count': Log.objects.count(),
-                                                                    'page_range': p.get_elided_page_range(page_num),
-                                                                    'page_num': page_num, 'paginator': p, 'user_note': user_note})
+    return render(request, 'music/index.html', {'logged_albums': p.page(page_number).object_list, 'count': Log.objects.count(),
+                                                                    'page_range': p.get_elided_page_range(page_number),
+                                                                    'page_num': page_number, 'paginator': p, 'user_note': user_note})
 
 
 def get_album(request, album_id):
