@@ -18,10 +18,11 @@ API_KEY = env('API_KEY')
 url = 'https://ws.audioscrobbler.com/2.0/'
 mbz.set_useragent('get_data', '0.1')
 log_per_page = 20
-log_count = Log.objects.count()
+
 
 # Create your views here.
 def index(request):
+    log_count = Log.objects.count()
     logged_albums = Log.objects.order_by('-logged_date')
     p = Paginator(logged_albums, log_per_page)
     user_note = request.session.get('user_note', '')
@@ -149,6 +150,7 @@ def get_log_by_year(request):
         result = get_log_by_release_year(year)
         p = Paginator(result, log_per_page)
 
+    log_count = Log.objects.count()
     user_note = request.session.get('user_note', '')
     return render(request, 'music/index.html', {'logged_albums': p.page(1).object_list,
                                                                     'count': log_count,
