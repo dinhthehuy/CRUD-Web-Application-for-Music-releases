@@ -56,19 +56,18 @@
         </div>
 
         <section id="homepage-main-content">
-            {% if logged_albums %}
             <table id="album-log-table">
+                 {% if logged_albums %}
                 <thead>
                     <tr>
                         <th></th>
-                        <th class="log_date_col">Date</th>
+                        <th style="width: 13%; text-align: left">Date</th>
                         <th></th>
-                        <th>Release</th>
-                        <th>Artist</th>
-                        <th>Year</th>
+                        <th style="width: 50%; text-align: left">Release</th>
+                        <th style="text-align: left">Artist</th>
+                        <th style="text-align: left">Year</th>
                     </tr>
                 </thead>
-
                 {% for log in logged_albums %}
                     <tr class="entry-log-cell">
                         <td>
@@ -84,8 +83,8 @@
                         <td>{{ log.album.release_date|date:"Y" }}</td>
                     </tr>
                 {% endfor %}
-            </table>
             {% endif %}
+            </table>
 
             <aside>
                 <strong><label for="user-note">Note</label></strong>

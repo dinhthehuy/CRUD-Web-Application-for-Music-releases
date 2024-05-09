@@ -39,7 +39,7 @@ h2 {
 
 #homepage-search-form {
     margin-left: 2.5%;
-    margin-top: 6.5%;
+    margin-top: 4.5%;
 }
 
 h2 {
@@ -59,11 +59,12 @@ h2 {
     margin: 2% 2.5% 0 2%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 #album-log-table {
     height: fit-content;
-    /*width: 75%;*/
+    width: 75%;
     border-spacing: 0.5em 0;
 }
 
