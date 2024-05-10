@@ -46,11 +46,12 @@
             {% endfor %}
             </span>
 
-            <form method="get" action="{% url 'log_by_year' %}">
-                <select name="filter-by">
+            <form id="filter-form" method="get" action="{% url 'filter_log' %}">
+                <select id="filter-select" name="filter" onchange="changeInputType()">
                     <option value="release-year">Release Year</option>
+                    <option value="release-name">Release</option>
                 </select>
-                <input type="number" name="year" required>
+                <input id="filter-input" type="number" name="year" required>
                 <input type="submit" value="Filter">
             </form>
         </div>
@@ -61,7 +62,7 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th style="width: 13%; text-align: left">Date</th>
+                        <th style="width: 17%; text-align: left">Date</th>
                         <th></th>
                         <th style="width: 50%; text-align: left">Release</th>
                         <th style="text-align: left">Artist</th>
