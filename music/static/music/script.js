@@ -80,3 +80,16 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+function changeInputType() {
+    const filterSelect = document.getElementById('filter-select')
+    const filterInput = document.getElementById('filter-input')
+    if (filterSelect.value === 'release-year') {
+        filterInput.type = 'number'
+        filterInput.name = 'year'
+    } else {
+        filterInput.type = 'text'
+        filterInput.name = 'release'
+    }
+
+}
