@@ -9,7 +9,7 @@ from musicbrainzngs import musicbrainz as mbz
 
 from .crud import insert_album, insert_logged_album, insert_artist, get_artist_by_id, insert_album_tag, \
     get_all_tags_by_album_id, get_all_albums_with_tag, get_album_by_id, get_all_albums_by_artist, \
-    get_log_by_release_year, get_log_by_release_name
+    get_log_by_release_year, get_log_by_release_name, get_log_by_artist_name
 from .models import Log
 
 env = environ.Env()
@@ -145,7 +145,7 @@ def save_note(request):
         return redirect('index')
     return JsonResponse({'status': 'Invalid request'}, status=400)
 
-def filter_log_by_year(request):
+def filter_log(request):
     if request.GET.get('filter') == 'release-year':
         year = request.GET.get('year')
         result = get_log_by_release_year(year)
@@ -153,6 +153,10 @@ def filter_log_by_year(request):
     elif request.GET.get('filter') == 'release-name':
         name = request.GET.get('release')
         result = get_log_by_release_name(name)
+
+    elif request.GET.get('filter') == 'artist':
+        artist = request.GET.get('artist')
+        result = get_log_by_artist_name(artist)
 
     p = Paginator(result, log_per_page)
     log_count = Log.objects.count()

@@ -87,9 +87,11 @@ function changeInputType() {
     if (filterSelect.value === 'release-year') {
         filterInput.type = 'number'
         filterInput.name = 'year'
-    } else {
+    } else if (filterSelect.value === 'release-name'){
         filterInput.type = 'text'
         filterInput.name = 'release'
+    } else if (filterSelect.value === 'artist') {
+        filterInput.type = 'text'
+        filterInput.name = 'artist'
     }
-
 }
