@@ -18,6 +18,8 @@ def get_log_by_release_year(year):
 def get_log_by_release_name(name):
     return Log.objects.filter(album__name__icontains=name)
 
+def get_log_by_artist_name(name):
+    return Log.objects.filter(artist__name__istartswith=name)
 
 def get_all_logged_albums():
     return Log.objects.all()
